@@ -19,17 +19,17 @@ class FakeServer {
         return javaClass.classLoader?.getResourceAsStream(file)?.reader().use { it?.readText() }
     }
 
-    fun globalMetricsDefaultResponse() {
+    fun willAnswerDefaultMarketDataInformation() {
         val response = readJsonFromResources("global_metrics_default_response.json")
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(response))
     }
 
-    fun globalMetricsMarketDataResponse() {
+    fun willAnswerMarketDataInformation() {
         val response = readJsonFromResources("global_metrics_market_data_response.json")
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(response))
     }
 
-    fun globalMetricsPositiveBtcDominanceResponse() {
+    fun willAnswerMarketDataWithPositiveBtcDominance() {
         val response = readJsonFromResources("global_metrics_positive_btc_dominance_response.json")
         mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(response))
     }

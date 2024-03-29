@@ -36,7 +36,7 @@ class MainActivityTest {
 
     @Test
     fun testHeaderIsDisplayed() {
-        fakeServer.globalMetricsDefaultResponse()
+        fakeServer.willAnswerDefaultMarketDataInformation()
 
         ActivityScenario.launch(MainActivity::class.java)
 
@@ -47,7 +47,7 @@ class MainActivityTest {
 
     @Test
     fun testMarketDataIsDisplayed() {
-        fakeServer.globalMetricsMarketDataResponse()
+        fakeServer.willAnswerMarketDataInformation()
 
         ActivityScenario.launch(MainActivity::class.java)
 
@@ -59,7 +59,7 @@ class MainActivityTest {
 
     @Test
     fun testDisplaysPositiveMarketCapVariation() = runTest {
-        fakeServer.globalMetricsPositiveBtcDominanceResponse()
+        fakeServer.willAnswerMarketDataWithPositiveBtcDominance()
 
         ActivityScenario.launch(MainActivity::class.java)
 
