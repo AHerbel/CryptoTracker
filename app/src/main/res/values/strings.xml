@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CryptoTracker</string>
+    <string name="live_prices">Live Prices</string>
+    <string name="market_cap">Market Cap</string>
+</resources>
