@@ -8,8 +8,6 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -21,7 +19,7 @@ import org.junit.Test
 @UninstallModules(UrlModule::class)
 class MainActivityTest {
 
-    private val mockWebServer = MockWebServer()
+    private val fakeServer = FakeServer()
 
     @get:Rule(order = 0)
     val hiltAndroidRule = HiltAndroidRule(this)
@@ -32,39 +30,20 @@ class MainActivityTest {
     @Before
     fun setup() {
         hiltAndroidRule.inject()
-        mockWebServer.start(8080)
+        fakeServer.start()
     }
 
     @After
     fun tearDown() {
-        mockWebServer.shutdown()
+        fakeServer.shutdown()
     }
 
     @Test
     fun testHeaderIsDisplayed() {
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody("""
-            {
-                "data": {
-                     "btc_dominance": 100000,
-                     "btc_dominance_24h_percentage_change": -16.08,
-                     "quote": {
-                         "USD": {
-                             "total_market_cap": 123,
-                             "total_volume_24h": 123
-                         }
-                     }
-                },
-                "status": {
-                    "timestamp": "123",
-                    "error_code": 1234,
-                    "error_message": "asd",
-                    "elapsed": 1234,
-                    "credit_count": 123,
-                    "notice": "asdas"
-                }
-            }
-        """.trimIndent()))
+        fakeServer.globalMetricsSuccess()
+
         ActivityScenario.launch(MainActivity::class.java)
+
         mainScreen(composeRule) {
             displaysHeader()
         }
@@ -72,29 +51,10 @@ class MainActivityTest {
 
     @Test
     fun testMarketDataIsDisplayed() {
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody("""
-            {
-                "data": {
-                     "btc_dominance": 100000,
-                     "btc_dominance_24h_percentage_change": -16.08,
-                     "quote": {
-                         "USD": {
-                             "total_market_cap": 123,
-                             "total_volume_24h": 123
-                         }
-                     }
-                },
-                "status": {
-                    "timestamp": "123",
-                    "error_code": 1234,
-                    "error_message": "asd",
-                    "elapsed": 1234,
-                    "credit_count": 123,
-                    "notice": "asdas"
-                }
-            }
-        """.trimIndent()))
+        fakeServer.globalMetricsSuccess()
+
         ActivityScenario.launch(MainActivity::class.java)
+
         mainScreen(composeRule) {
             displaysMarketData()
             displaysMarketCap("$123.00Tr", "-16.08%")
@@ -103,28 +63,7 @@ class MainActivityTest {
 
     @Test
     fun testDisplaysPositiveMarketCapVariation() = runTest {
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody("""
-            {
-                "data": {
-                     "btc_dominance": 100000,
-                     "btc_dominance_24h_percentage_change": 10,
-                     "quote": {
-                         "USD": {
-                             "total_market_cap": 123,
-                             "total_volume_24h": 123
-                         }
-                     }
-                },
-                "status": {
-                    "timestamp": "123",
-                    "error_code": 1234,
-                    "error_message": "asd",
-                    "elapsed": 1234,
-                    "credit_count": 123,
-                    "notice": "asdas"
-                }
-            }
-        """.trimIndent()))
+        fakeServer.globalMetricsSuccess(10.0)
 
         ActivityScenario.launch(MainActivity::class.java)
 
