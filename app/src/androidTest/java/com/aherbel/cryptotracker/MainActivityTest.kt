@@ -8,7 +8,6 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -19,23 +18,20 @@ import org.junit.Test
 @UninstallModules(UrlModule::class)
 class MainActivityTest {
 
-    private val fakeServer = FakeServer()
-
     @get:Rule(order = 0)
     val hiltAndroidRule = HiltAndroidRule(this)
 
     @get:Rule(order = 1)
     val composeRule = createComposeRule()
 
+    @get:Rule(order = 2)
+    val fakeServerRule = FakeServerRule()
+
+    private val fakeServer: FakeServer get() = fakeServerRule.fakeServer
+
     @Before
     fun setup() {
         hiltAndroidRule.inject()
-        fakeServer.start()
-    }
-
-    @After
-    fun tearDown() {
-        fakeServer.shutdown()
     }
 
     @Test
