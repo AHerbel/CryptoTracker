@@ -1,13 +1,18 @@
 package com.aherbel.cryptotracker
 
+import com.aherbel.cryptotracker.application.network.AddApiKeyHeaderInterceptor
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
+import java.net.HttpURLConnection
 
 class FakeServer {
 
     private val mockWebServer = MockWebServer()
 
     fun start() {
+        mockWebServer.requireClientAuth()
         mockWebServer.start(8080)
     }
 
@@ -21,17 +26,36 @@ class FakeServer {
 
     fun willAnswerDefaultMarketDataInformation() {
         val response = readJsonFromResources("global_metrics_default_response.json")
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(response))
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
+        )
     }
 
     fun willAnswerMarketDataInformation() {
         val response = readJsonFromResources("global_metrics_market_data_response.json")
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(response))
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
+        )
     }
 
     fun willAnswerMarketDataWithPositiveBtcDominance() {
         val response = readJsonFromResources("global_metrics_positive_btc_dominance_response.json")
-        mockWebServer.enqueue(MockResponse().setResponseCode(200).setBody(response))
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
+        )
+    }
+
+    fun requestShouldContainsNonEmptyApiKeyHeader() {
+        val request = mockWebServer.takeRequest()
+        val apiKeyHeader = request.getHeader(AddApiKeyHeaderInterceptor.HEADER_API_KEY)
+        assertNotNull(
+            "Api Key header not present. Header=${AddApiKeyHeaderInterceptor.HEADER_API_KEY}",
+            apiKeyHeader
+        )
+        assertFalse(
+            "Api Key is empty.",
+            apiKeyHeader.isEmpty()
+        )
     }
 
 }

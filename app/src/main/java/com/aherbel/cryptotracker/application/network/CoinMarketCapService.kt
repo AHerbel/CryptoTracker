@@ -4,7 +4,7 @@ import retrofit2.http.GET
 
 interface CoinMarketCapService {
 
-    @GET("/global-metrics/quotes/latest")
+    @GET("v1/global-metrics/quotes/latest")
     suspend fun getLatestGlobalMetrics(): Response<GlobalMetricsResponse>
 
 }
