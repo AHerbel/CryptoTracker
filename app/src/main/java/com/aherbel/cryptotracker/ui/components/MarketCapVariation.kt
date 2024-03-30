@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -18,13 +19,21 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MarketCapVariation(variation: String, variationColor: Color) {
+fun MarketCapVariation(
+    variation: String,
+    variationIsPositive: Boolean
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
+        val variationColor = if (variationIsPositive) Color.Green else Color.Red
         Icon(
             imageVector = Icons.Default.ArrowDropDown,
             tint = variationColor,
             contentDescription = "MarketCapVariationArrow",
-            modifier = Modifier.size(20.dp)
+            modifier = Modifier.size(20.dp).apply {
+                if (variationIsPositive) {
+                    rotate(180f)
+                }
+            }
         )
         Text(
             text = variation,
@@ -39,5 +48,5 @@ fun MarketCapVariation(variation: String, variationColor: Color) {
 @Preview(showBackground = true)
 @Composable
 fun MarketCapVariationPreview() {
-    MarketCapVariation("-16.08%", Color.Red)
+    MarketCapVariation("-16.08%", false)
 }

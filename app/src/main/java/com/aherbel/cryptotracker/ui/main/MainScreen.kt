@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import com.aherbel.cryptotracker.ui.components.MarketData
 import com.aherbel.cryptotracker.ui.components.TopBar
@@ -37,7 +36,7 @@ fun MainScreenPreview() {
     val data = MarketDataUi(
         marketCapValue = "$1.35Tr",
         marketCapVariation = "-16.08%",
-        marketCapVariationColor = Color.Red
+        marketCapVariationIsPositive = false
     )
     CryptoTrackerTheme {
         MainScreen(marketData = data)

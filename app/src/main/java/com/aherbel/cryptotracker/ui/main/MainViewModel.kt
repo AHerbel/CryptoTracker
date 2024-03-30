@@ -1,6 +1,5 @@
 package com.aherbel.cryptotracker.ui.main
 
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aherbel.cryptotracker.domain.MarketDataRepository
@@ -22,7 +21,7 @@ class MainViewModel @Inject constructor(
             marketDataUi = MarketDataUi(
                 marketCapValue = "",
                 marketCapVariation = "",
-                marketCapVariationColor = Color.Gray
+                marketCapVariationIsPositive = true
             )
         )
     )
@@ -46,7 +45,7 @@ class MainViewModel @Inject constructor(
                     val marketDataUi = MarketDataUi(
                         marketCapValue = "$%.2fTr".format(marketData.marketCapValue),
                         marketCapVariation = formatter.format(marketCapVariation),
-                        marketCapVariationColor = if (marketCapVariation > 0) Color.Green else Color.Red
+                        marketCapVariationIsPositive = marketCapVariation > 0
                     )
                     updateUiState {  uiState ->
                         uiState.copy(marketDataUi = marketDataUi)
@@ -68,5 +67,5 @@ data class MainUiState(
 data class MarketDataUi(
     val marketCapValue: String,
     val marketCapVariation: String,
-    val marketCapVariationColor: Color
+    val marketCapVariationIsPositive: Boolean
 )

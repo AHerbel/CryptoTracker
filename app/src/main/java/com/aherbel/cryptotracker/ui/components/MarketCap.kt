@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
@@ -15,7 +14,7 @@ import androidx.compose.ui.unit.dp
 fun MarketCap(
     value: String,
     variation: String,
-    variationColor: Color
+    variationIsPositive: Boolean
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -25,7 +24,7 @@ fun MarketCap(
     ) {
         MarketCapTitle()
         MarketCapValue(value)
-        MarketCapVariation(variation, variationColor)
+        MarketCapVariation(variation, variationIsPositive)
     }
 }
 
@@ -35,6 +34,6 @@ fun MarketCapPreview() {
     MarketCap(
         value = "$1.35Tr",
         variation = "-16.08%",
-        variationColor = Color.Red
+        variationIsPositive = false
     )
 }
