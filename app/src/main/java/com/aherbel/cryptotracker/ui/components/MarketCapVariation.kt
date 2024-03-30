@@ -22,7 +22,7 @@ fun MarketCapVariation(variation: String, variationColor: Color) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Icon(
             imageVector = Icons.Default.ArrowDropDown,
-            tint = Color.Red,
+            tint = variationColor,
             contentDescription = "MarketCapVariationArrow",
             modifier = Modifier.size(20.dp)
         )
