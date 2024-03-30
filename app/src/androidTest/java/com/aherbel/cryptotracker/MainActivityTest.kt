@@ -62,7 +62,7 @@ class MainActivityTest {
 
     @Test
     fun testDisplaysPositiveMarketCapVariation() = runTest {
-        fakeServer.willAnswerMarketDataWithPositiveBtcDominance()
+        fakeServer.willAnswerMarketDataWithPositiveMarketCapPercentageChange()
 
         ActivityScenario.launch(MainActivity::class.java)
 

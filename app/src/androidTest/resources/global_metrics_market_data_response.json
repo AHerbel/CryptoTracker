@@ -1,20 +1,10 @@
 {
   "data": {
-    "btc_dominance": 0,
-    "btc_dominance_24h_percentage_change": -16.08,
     "quote": {
       "USD": {
         "total_market_cap": 123,
-        "total_volume_24h": 0
+        "total_market_cap_yesterday_percentage_change": -16.08
       }
     }
-  },
-  "status": {
-    "timestamp": "",
-    "error_code": 0,
-    "error_message": "",
-    "elapsed": 0,
-    "credit_count": 0,
-    "notice": ""
   }
 }

@@ -38,8 +38,8 @@ class FakeServer {
         )
     }
 
-    fun willAnswerMarketDataWithPositiveBtcDominance() {
-        val response = readJsonFromResources("global_metrics_positive_btc_dominance_response.json")
+    fun willAnswerMarketDataWithPositiveMarketCapPercentageChange() {
+        val response = readJsonFromResources("global_metrics_positive_total_market_cap_percentage_change_response.json")
         mockWebServer.enqueue(
             MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
         )
