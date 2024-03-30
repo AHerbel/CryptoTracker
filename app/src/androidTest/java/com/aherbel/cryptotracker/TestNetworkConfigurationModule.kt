@@ -2,6 +2,7 @@ package com.aherbel.cryptotracker
 
 import com.aherbel.cryptotracker.application.di.NetworkConfigurationModule
 import com.aherbel.cryptotracker.application.di.qualifiers.ApiKey
+import com.aherbel.cryptotracker.application.di.qualifiers.BaseUrl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent
@@ -17,6 +18,7 @@ class TestNetworkConfigurationModule {
 
     @Provides
     @Singleton
+    @BaseUrl
     fun providesBaseUrl(): String = "http://127.0.0.1:8080"
 
     @Provides

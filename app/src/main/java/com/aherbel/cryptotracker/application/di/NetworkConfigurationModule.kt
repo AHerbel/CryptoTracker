@@ -1,6 +1,7 @@
 package com.aherbel.cryptotracker.application.di
 
 import com.aherbel.cryptotracker.application.di.qualifiers.ApiKey
+import com.aherbel.cryptotracker.application.di.qualifiers.BaseUrl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,6 +14,7 @@ class NetworkConfigurationModule {
 
     @Provides
     @Singleton
+    @BaseUrl
     fun provideBaseUrl(): String = "https://pro-api.coinmarketcap.com/"
 
     @Provides

@@ -1,6 +1,7 @@
 package com.aherbel.cryptotracker.application.di
 
 import com.aherbel.cryptotracker.BuildConfig
+import com.aherbel.cryptotracker.application.di.qualifiers.BaseUrl
 import com.aherbel.cryptotracker.application.network.AddApiKeyHeaderInterceptor
 import com.aherbel.cryptotracker.application.network.CoinMarketCapService
 import dagger.Module
@@ -34,7 +35,7 @@ open class NetworkModule {
 
     @Provides
     fun providesRetrofit(
-        baseUrl: String,
+        @BaseUrl baseUrl: String,
         client: OkHttpClient
     ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
