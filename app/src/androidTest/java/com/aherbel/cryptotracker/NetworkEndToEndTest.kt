@@ -1,7 +1,7 @@
 package com.aherbel.cryptotracker
 
 import androidx.test.core.app.ActivityScenario
-import com.aherbel.cryptotracker.application.di.UrlModule
+import com.aherbel.cryptotracker.application.di.NetworkConfigurationModule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -10,7 +10,7 @@ import org.junit.Rule
 import org.junit.Test
 
 @HiltAndroidTest
-@UninstallModules(UrlModule::class)
+@UninstallModules(NetworkConfigurationModule::class)
 class NetworkEndToEndTest {
 
     @get:Rule(order = 0)

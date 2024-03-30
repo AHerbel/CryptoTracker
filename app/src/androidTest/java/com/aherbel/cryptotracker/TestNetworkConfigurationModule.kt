@@ -1,6 +1,6 @@
 package com.aherbel.cryptotracker
 
-import com.aherbel.cryptotracker.application.di.UrlModule
+import com.aherbel.cryptotracker.application.di.NetworkConfigurationModule
 import com.aherbel.cryptotracker.application.di.qualifiers.ApiKey
 import dagger.Module
 import dagger.Provides
@@ -11,9 +11,9 @@ import javax.inject.Singleton
 @Module
 @TestInstallIn(
     components = [SingletonComponent::class],
-    replaces = [UrlModule::class]
+    replaces = [NetworkConfigurationModule::class]
 )
-class TestUrlModule {
+class TestNetworkConfigurationModule {
 
     @Provides
     @Singleton

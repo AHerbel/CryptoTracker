@@ -2,7 +2,7 @@ package com.aherbel.cryptotracker
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.core.app.ActivityScenario
-import com.aherbel.cryptotracker.application.di.UrlModule
+import com.aherbel.cryptotracker.application.di.NetworkConfigurationModule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -15,7 +15,7 @@ import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltAndroidTest
-@UninstallModules(UrlModule::class)
+@UninstallModules(NetworkConfigurationModule::class)
 class MainActivityTest {
 
     @get:Rule(order = 0)

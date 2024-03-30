@@ -9,7 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class UrlModule {
+class NetworkConfigurationModule {
 
     @Provides
     @Singleton
