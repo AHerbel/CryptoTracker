@@ -29,11 +29,9 @@ fun MarketCapVariation(
             imageVector = Icons.Default.ArrowDropDown,
             tint = variationColor,
             contentDescription = "MarketCapVariationArrow",
-            modifier = Modifier.size(20.dp).apply {
-                if (variationIsPositive) {
-                    rotate(180f)
-                }
-            }
+            modifier = Modifier
+                .size(20.dp)
+                .rotate(if (variationIsPositive) 180f else 0f)
         )
         Text(
             text = variation,
