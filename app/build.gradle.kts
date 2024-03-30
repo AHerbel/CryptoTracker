@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "com.aherbel.cryptotracker.HiltTestApplicationTestRunner"
+        testInstrumentationRunner = "com.aherbel.cryptotracker.infra.HiltTestApplicationTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }

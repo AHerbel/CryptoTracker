@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker
+package com.aherbel.cryptotracker.infra
 
 import android.app.Application
 import android.content.Context

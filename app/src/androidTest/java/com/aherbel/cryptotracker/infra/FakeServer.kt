@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker
+package com.aherbel.cryptotracker.infra
 
 import com.aherbel.cryptotracker.application.network.AddApiKeyHeaderInterceptor
 import okhttp3.mockwebserver.MockResponse

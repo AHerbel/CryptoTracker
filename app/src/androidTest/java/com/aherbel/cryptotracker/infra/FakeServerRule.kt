@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker
+package com.aherbel.cryptotracker.infra
 
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description

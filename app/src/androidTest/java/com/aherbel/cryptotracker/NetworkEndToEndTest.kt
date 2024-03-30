@@ -2,6 +2,8 @@ package com.aherbel.cryptotracker
 
 import androidx.test.core.app.ActivityScenario
 import com.aherbel.cryptotracker.application.di.NetworkConfigurationModule
+import com.aherbel.cryptotracker.infra.FakeServer
+import com.aherbel.cryptotracker.infra.FakeServerRule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules

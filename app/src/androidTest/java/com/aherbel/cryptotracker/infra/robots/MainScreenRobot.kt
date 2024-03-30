@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker
+package com.aherbel.cryptotracker.infra.robots
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.assertHasClickAction
