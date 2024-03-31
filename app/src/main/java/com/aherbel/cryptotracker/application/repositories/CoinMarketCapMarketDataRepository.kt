@@ -10,6 +10,6 @@ class CoinMarketCapMarketDataRepository @Inject constructor(
     private val marketDataNetworkDataSource : MarketDataNetworkDataSource
 ) : MarketDataRepository {
 
-    override suspend fun getMarketData(): Flow<MarketData> =
-        marketDataNetworkDataSource.getMarketData()
+    override fun marketData(): Flow<MarketData> =
+        marketDataNetworkDataSource.marketData()
 }

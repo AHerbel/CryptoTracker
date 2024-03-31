@@ -9,7 +9,7 @@ class FakeMarketDataRepository : MarketDataRepository {
 
     var items: List<MarketData> = emptyList()
 
-    override suspend fun getMarketData(): Flow<MarketData> = flow {
+    override fun marketData(): Flow<MarketData> = flow {
         items.forEach {
             emit(it)
         }

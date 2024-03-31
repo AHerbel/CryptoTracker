@@ -4,6 +4,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MarketDataRepository {
 
-    suspend fun getMarketData(): Flow<MarketData>
-
+    fun marketData(): Flow<MarketData>
 }

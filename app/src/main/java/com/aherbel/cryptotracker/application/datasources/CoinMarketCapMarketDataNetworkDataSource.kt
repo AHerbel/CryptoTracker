@@ -12,7 +12,7 @@ class CoinMarketCapMarketDataNetworkDataSource @Inject constructor(
     private val coinMarketCapService : CoinMarketCapService
 ) : MarketDataNetworkDataSource {
 
-    override suspend fun getMarketData(): Flow<MarketData> = callbackFlow {
+    override fun marketData(): Flow<MarketData> = callbackFlow {
         val globalMetricsResponse = coinMarketCapService.getLatestGlobalMetrics()
         val data = globalMetricsResponse.data
 

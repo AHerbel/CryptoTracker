@@ -21,7 +21,7 @@ class MainViewModel @Inject constructor(
 
     fun requestMarketData() {
         viewModelScope.launch {
-            marketDataRepository.getMarketData()
+            marketDataRepository.marketData()
                 .collect { marketData ->
                     val marketCapVariation = marketData.marketCapVariation
                     val formatter = DecimalFormat().apply {
