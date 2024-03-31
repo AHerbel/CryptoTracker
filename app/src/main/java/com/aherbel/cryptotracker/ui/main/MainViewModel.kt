@@ -21,7 +21,7 @@ class MainViewModel @Inject constructor(
             marketDataUi = MarketDataUi(
                 marketCapValue = "",
                 marketCapVariation = "",
-                marketCapVariationIsPositive = true
+                marketCapVariationIsPositive = false
             )
         )
     )
