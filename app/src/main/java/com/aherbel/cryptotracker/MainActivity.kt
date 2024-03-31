@@ -18,12 +18,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.collectMarketData()
+
         setContent {
             CryptoTrackerTheme {
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                MainScreen(
-                    marketData = uiState.marketDataUi
-                )
+                MainScreen(marketData = uiState.marketDataUi)
             }
         }
     }

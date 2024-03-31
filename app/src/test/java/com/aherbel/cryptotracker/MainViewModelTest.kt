@@ -18,6 +18,8 @@ class MainViewModelTest {
     fun `test request market data emits initial state as first item when requested`() = runTest {
         val mainViewModel = MainViewModel(FakeMarketDataRepository())
 
+        mainViewModel.collectMarketData()
+
         mainViewModel.uiState.test {
             val mainUiState = awaitItem()
             val expected = aMainUiState().build()
