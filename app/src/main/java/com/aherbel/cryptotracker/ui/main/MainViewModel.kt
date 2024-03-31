@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(initialMainUiState())
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
-    fun collectMarketData() {
+    fun requestMarketData() {
         viewModelScope.launch {
             marketDataRepository.getMarketData()
                 .collect { marketData ->
