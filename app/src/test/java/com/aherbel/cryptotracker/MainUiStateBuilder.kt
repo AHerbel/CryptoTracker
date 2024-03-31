@@ -4,7 +4,7 @@ import com.aherbel.cryptotracker.MarketDataUiBuilder.Companion.aMarketDataUi
 import com.aherbel.cryptotracker.ui.main.MainUiState
 import com.aherbel.cryptotracker.ui.main.MarketDataUi
 
-class MainUiStateBuilder private constructor(
+data class MainUiStateBuilder(
     private var marketDataUi: MarketDataUi = aMarketDataUi().build()
 ) {
 
@@ -12,13 +12,9 @@ class MainUiStateBuilder private constructor(
         fun aMainUiState(): MainUiStateBuilder = MainUiStateBuilder()
     }
 
-    private fun new(): MainUiStateBuilder = MainUiStateBuilder(marketDataUi)
-
     fun with(marketDataUi: MarketDataUiBuilder): MainUiStateBuilder {
-        this.marketDataUi = marketDataUi.build()
-        return new()
+        return copy(marketDataUi = marketDataUi.build())
     }
 
     fun build(): MainUiState = MainUiState(marketDataUi = marketDataUi)
-
 }

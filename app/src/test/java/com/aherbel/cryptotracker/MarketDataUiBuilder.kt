@@ -2,7 +2,7 @@ package com.aherbel.cryptotracker
 
 import com.aherbel.cryptotracker.ui.main.MarketDataUi
 
-class MarketDataUiBuilder private constructor(
+data class MarketDataUiBuilder(
     private var marketCapValue: String = "",
     private var marketCapVariation: String = "",
     private var marketCapVariationIsPositive: Boolean = false
@@ -12,25 +12,16 @@ class MarketDataUiBuilder private constructor(
         fun aMarketDataUi(): MarketDataUiBuilder = MarketDataUiBuilder()
     }
 
-    private fun new(): MarketDataUiBuilder = MarketDataUiBuilder(
-        marketCapValue = marketCapValue,
-        marketCapVariation = marketCapVariation,
-        marketCapVariationIsPositive = marketCapVariationIsPositive
-    )
-
     fun withMarketCapValue(marketCapValue: String): MarketDataUiBuilder {
-        this.marketCapValue = marketCapValue
-        return new()
+        return copy(marketCapValue = marketCapValue)
     }
 
     fun withMarketCapVariation(marketCapVariation: String): MarketDataUiBuilder {
-        this.marketCapVariation = marketCapVariation
-        return new()
+        return copy(marketCapVariation = marketCapVariation)
     }
 
     fun withMarketCapVariationIsPositive(marketCapVariationIsPositive: Boolean): MarketDataUiBuilder {
-        this.marketCapVariationIsPositive = marketCapVariationIsPositive
-        return new()
+        return copy(marketCapVariationIsPositive = marketCapVariationIsPositive)
     }
 
     fun build(): MarketDataUi = MarketDataUi(
