@@ -2,6 +2,7 @@ package com.aherbel.cryptotracker
 
 import com.aherbel.cryptotracker.MainUiStateBuilder.Companion.aMainUiState
 import com.aherbel.cryptotracker.MarketDataBuilder.Companion.aMarketData
+import com.aherbel.cryptotracker.application.DecimalPercentageFormatter
 import com.aherbel.cryptotracker.ui.main.MainViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -16,7 +17,7 @@ class MainViewModelTest {
     val testDispatcherRule = TestDispatcherRule()
 
     private val fakeMarketDataRepository = FakeMarketDataRepository()
-    private val mainViewModel = MainViewModel(fakeMarketDataRepository)
+    private val mainViewModel = MainViewModel(fakeMarketDataRepository, DecimalPercentageFormatter())
 
     @Test
     fun `test request market data emits initial state as first item when requested`() = runTest {
@@ -33,7 +34,7 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `test marketCapVariation get formatted with 2 decimal places only`() = runTest {
+    fun `test marketCapVariation get formatted with 2 decimal`() = runTest {
         fakeMarketDataRepository.items = listOf(
             aMarketData().withMarketCapVariation(10.1234).build()
         )
