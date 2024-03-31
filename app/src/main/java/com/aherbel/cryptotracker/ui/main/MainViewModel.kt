@@ -16,15 +16,7 @@ class MainViewModel @Inject constructor(
     private val marketDataRepository: MarketDataRepository
 ) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(
-        MainUiState(
-            marketDataUi = MarketDataUi(
-                marketCapValue = "",
-                marketCapVariation = "",
-                marketCapVariationIsPositive = false
-            )
-        )
-    )
+    private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(initialMainUiState())
     val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
     init {
@@ -47,7 +39,7 @@ class MainViewModel @Inject constructor(
                         marketCapVariation = formatter.format(marketCapVariation),
                         marketCapVariationIsPositive = marketCapVariation > 0
                     )
-                    updateUiState {  uiState ->
+                    updateUiState { uiState ->
                         uiState.copy(marketDataUi = marketDataUi)
                     }
                 }
@@ -58,6 +50,15 @@ class MainViewModel @Inject constructor(
         _uiState.emit(block(_uiState.value))
     }
 
+    private fun initialMainUiState(): MainUiState = MainUiState(
+        marketDataUi = initialMarketDataUi()
+    )
+
+    private fun initialMarketDataUi(): MarketDataUi = MarketDataUi(
+        marketCapValue = "",
+        marketCapVariation = "",
+        marketCapVariationIsPositive = false
+    )
 }
 
 data class MainUiState(
