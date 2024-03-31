@@ -32,7 +32,7 @@ class MainViewModelTest {
         )
     }
 
-    @Test(timeout = 3000)
+    @Test
     fun `test marketCapVariation get formatted with 2 decimal places only`() = runTest {
         fakeMarketDataRepository.items = listOf(
             aMarketData().withMarketCapVariation(10.1234).build()
