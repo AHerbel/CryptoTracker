@@ -14,17 +14,21 @@ class MainViewModelTest {
     @get:Rule
     val testDispatcherRule = TestDispatcherRule()
 
+    private val mainViewModel = MainViewModel(FakeMarketDataRepository())
+
     @Test
     fun `test request market data emits initial state as first item when requested`() = runTest {
-        val mainViewModel = MainViewModel(FakeMarketDataRepository())
-
         mainViewModel.requestMarketData()
 
         mainViewModel.uiState.test {
             val mainUiState = awaitItem()
             val expected = aMainUiState().build()
-            assertNotNull(mainUiState)
-            assertEquals(expected, mainUiState)
+            assertNotNull("Initial state is null. It should be $expected", mainUiState)
+            assertEquals(
+                "Initial state is different from expected.",
+                expected,
+                mainUiState
+            )
         }
     }
 }
