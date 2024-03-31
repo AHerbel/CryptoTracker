@@ -14,8 +14,8 @@ class MainUiStateBuilder private constructor(
 
     private fun new(): MainUiStateBuilder = MainUiStateBuilder(marketDataUi)
 
-    fun with(marketDataUi: MarketDataUi): MainUiStateBuilder {
-        this.marketDataUi = marketDataUi
+    fun with(marketDataUi: MarketDataUiBuilder): MainUiStateBuilder {
+        this.marketDataUi = marketDataUi.build()
         return new()
     }
 
