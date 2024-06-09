@@ -74,6 +74,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.okhttp.logginginterceptor)
+    implementation(libs.icu4j)
 
     testImplementation(libs.junit)
     testImplementation(libs.junitparams)

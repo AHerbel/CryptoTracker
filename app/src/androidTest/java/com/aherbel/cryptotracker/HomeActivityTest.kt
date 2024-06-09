@@ -60,18 +60,6 @@ class HomeActivityTest {
     }
 
     @Test
-    fun open_homeScreen_displaysMarketData() {
-        fakeServer.willAnswerMarketDataInformation()
-
-        ActivityScenario.launch(HomeActivity::class.java)
-
-        homeScreen(composeRule) {
-            displaysMarketData()
-            displaysMarketCap("$123.00Tr", "-16.08%")
-        }
-    }
-
-    @Test
     fun open_homeScreen_displaysPositiveMarketCapVariation() = runTest {
         fakeServer.willAnswerMarketDataWithPositiveMarketCapPercentageChange()
 
@@ -90,6 +78,28 @@ class HomeActivityTest {
 
         homeScreen(composeRule) {
             displaysNegativeMarketCapVariation("-10%")
+        }
+    }
+
+    @Test
+    fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInTrillions() {
+        fakeServer.willAnswerMarketDataWithMarketCapValueOfTrillions()
+
+        ActivityScenario.launch(HomeActivity::class.java)
+
+        homeScreen(composeRule) {
+            displaysMarketCapValue("$123.00T")
+        }
+    }
+
+    @Test
+    fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInBillions() {
+        fakeServer.willAnswerMarketDataWithMarketCapValueOfBillions()
+
+        ActivityScenario.launch(HomeActivity::class.java)
+
+        homeScreen(composeRule) {
+            displaysMarketCapValue("$123.00B")
         }
     }
 }

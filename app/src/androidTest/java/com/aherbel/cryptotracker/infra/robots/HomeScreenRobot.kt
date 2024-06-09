@@ -105,4 +105,10 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
             .assertTextEquals(title)
     }
 
+    fun displaysMarketCapValue(value: String) {
+        marketCapValue
+            .assertIsDisplayed()
+            .assertTextEquals(value)
+    }
+
 }

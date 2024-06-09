@@ -5,11 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.aherbel.cryptotracker.domain.MarketData
 import com.aherbel.cryptotracker.domain.MarketDataRepository
 import com.aherbel.cryptotracker.domain.PercentageFormatter
+import com.ibm.icu.number.Notation
+import com.ibm.icu.number.NumberFormatter
+import com.ibm.icu.number.Precision
+import com.ibm.icu.util.Currency
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,10 +40,21 @@ class HomeViewModel @Inject constructor(
     private fun mapToUi(marketData: MarketData): MarketDataUi {
         val marketCapVariation = marketData.marketCapVariation
         return MarketDataUi(
-            marketCapValue = "$%.2fTr".format(marketData.marketCapValue),
+            marketCapValue = formatMarketCapValue(marketData.marketCapValue),
             marketCapVariation = percentageFormatter.format(marketCapVariation),
             marketCapVariationIsPositive = marketCapVariation > 0
         )
+    }
+
+    private fun formatMarketCapValue(marketCapValue: Double): String {
+        return NumberFormatter
+            .with()
+            .locale(Locale.US)
+            .unit(Currency.getInstance(Locale.US))
+            .precision(Precision.currency(Currency.CurrencyUsage.STANDARD))
+            .notation(Notation.compactShort())
+            .format(marketCapValue)
+            .toString()
     }
 
     private suspend fun updateUiState(block: (HomeUiState) -> HomeUiState) {

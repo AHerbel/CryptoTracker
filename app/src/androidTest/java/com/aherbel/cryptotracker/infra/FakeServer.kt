@@ -31,8 +31,15 @@ class FakeServer {
         )
     }
 
-    fun willAnswerMarketDataInformation() {
-        val response = readJsonFromResources("global_metrics_market_data_response.json")
+    fun willAnswerMarketDataWithMarketCapValueOfTrillions() {
+        val response = readJsonFromResources("global_metrics_market_data_market_cap_value_trillions.json")
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
+        )
+    }
+
+    fun willAnswerMarketDataWithMarketCapValueOfBillions() {
+        val response = readJsonFromResources("global_metrics_market_data_market_cap_value_billions.json")
         mockWebServer.enqueue(
             MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
         )
