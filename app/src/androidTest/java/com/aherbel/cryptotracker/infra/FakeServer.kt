@@ -33,35 +33,24 @@ class FakeServer {
         configure200Response(response)
     }
 
-    fun willAnswerMarketDataWithMarketCapValueOfTrillions() {
+    fun willAnswerMarketDataWithMarketCapValueOf(marketCapValue: Double) {
         val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
             jsonResponse
                 .getJSONObject("data")
                 .getJSONObject("quote")
                 .getJSONObject("USD")
-                .put("total_market_cap", 1230000000000)
+                .put("total_market_cap", marketCapValue)
         }
         configure200Response(response)
     }
 
-    fun willAnswerMarketDataWithMarketCapValueOfBillions() {
+    fun willAnswerMarketDataWithMarketCapPercentageChange(marketCapPercentageChange: Int) {
         val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
             jsonResponse
                 .getJSONObject("data")
                 .getJSONObject("quote")
                 .getJSONObject("USD")
-                .put("total_market_cap", 1230000000)
-        }
-        configure200Response(response)
-    }
-
-    fun willAnswerMarketDataWithPositiveMarketCapPercentageChange() {
-        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
-            jsonResponse
-                .getJSONObject("data")
-                .getJSONObject("quote")
-                .getJSONObject("USD")
-                .put("total_market_cap_yesterday_percentage_change", 10)
+                .put("total_market_cap_yesterday_percentage_change", marketCapPercentageChange)
         }
         configure200Response(response)
     }
@@ -77,17 +66,6 @@ class FakeServer {
             "Api Key is empty.",
             apiKeyHeader.isEmpty()
         )
-    }
-
-    fun willAnswerMarketDataWithNegativeMarketCapPercentageChange() {
-        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
-            jsonResponse
-                .getJSONObject("data")
-                .getJSONObject("quote")
-                .getJSONObject("USD")
-                .put("total_market_cap_yesterday_percentage_change", -10)
-        }
-        configure200Response(response)
     }
 
     private fun configure200Response(response: String) {
