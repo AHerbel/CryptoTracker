@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.okhttp.logginginterceptor)
 
     testImplementation(libs.junit)
+    testImplementation(libs.junitparams)
     testImplementation(libs.coroutines.test)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
