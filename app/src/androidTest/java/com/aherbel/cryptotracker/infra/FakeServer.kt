@@ -3,6 +3,7 @@ package com.aherbel.cryptotracker.infra
 import com.aherbel.cryptotracker.application.network.AddApiKeyHeaderInterceptor
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
+import org.json.JSONObject
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import java.net.HttpURLConnection
@@ -32,16 +33,28 @@ class FakeServer {
     }
 
     fun willAnswerMarketDataWithMarketCapValueOfTrillions() {
-        val response = readJsonFromResources("global_metrics_market_data_market_cap_value_trillions.json")
+        val rawResponse = readJsonFromResources("global_metrics_default_response.json")
+        val jsonResponse = JSONObject(rawResponse.orEmpty())
+        jsonResponse
+            .getJSONObject("data")
+            .getJSONObject("quote")
+            .getJSONObject("USD")
+            .put("total_market_cap", 123000000000000)
         mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(jsonResponse.toString())
         )
     }
 
     fun willAnswerMarketDataWithMarketCapValueOfBillions() {
-        val response = readJsonFromResources("global_metrics_market_data_market_cap_value_billions.json")
+        val rawResponse = readJsonFromResources("global_metrics_default_response.json")
+        val jsonResponse = JSONObject(rawResponse.orEmpty())
+        jsonResponse
+            .getJSONObject("data")
+            .getJSONObject("quote")
+            .getJSONObject("USD")
+            .put("total_market_cap", 123000000000)
         mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(jsonResponse.toString())
         )
     }
 
