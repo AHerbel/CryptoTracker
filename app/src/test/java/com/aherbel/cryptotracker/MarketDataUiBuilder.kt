@@ -1,6 +1,6 @@
 package com.aherbel.cryptotracker
 
-import com.aherbel.cryptotracker.ui.main.MarketDataUi
+import com.aherbel.cryptotracker.ui.home.MarketDataUi
 
 data class MarketDataUiBuilder(
     private var marketCapValue: String = "",

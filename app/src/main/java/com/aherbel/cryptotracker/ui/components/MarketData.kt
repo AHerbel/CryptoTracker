@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
-import com.aherbel.cryptotracker.ui.main.MarketDataUi
+import com.aherbel.cryptotracker.ui.home.MarketDataUi
 
 @Composable
 fun MarketData(marketData: MarketDataUi) {

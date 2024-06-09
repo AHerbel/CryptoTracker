@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker.ui.main
+package com.aherbel.cryptotracker.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,13 +13,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val marketDataRepository: MarketDataRepository,
     private val percentageFormatter: PercentageFormatter
 ) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(initialMainUiState())
-    val uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
+    private val _uiState: MutableStateFlow<HomeUiState> = MutableStateFlow(initialMainUiState())
+    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     fun requestMarketData() {
         viewModelScope.launch {
@@ -41,11 +41,11 @@ class MainViewModel @Inject constructor(
         )
     }
 
-    private suspend fun updateUiState(block: (MainUiState) -> MainUiState) {
+    private suspend fun updateUiState(block: (HomeUiState) -> HomeUiState) {
         _uiState.emit(block(_uiState.value))
     }
 
-    private fun initialMainUiState(): MainUiState = MainUiState(
+    private fun initialMainUiState(): HomeUiState = HomeUiState(
         marketDataUi = initialMarketDataUi()
     )
 
@@ -56,7 +56,7 @@ class MainViewModel @Inject constructor(
     )
 }
 
-data class MainUiState(
+data class HomeUiState(
     val marketDataUi: MarketDataUi
 )
 

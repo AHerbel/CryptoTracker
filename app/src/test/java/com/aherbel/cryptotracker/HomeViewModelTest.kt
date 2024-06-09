@@ -1,9 +1,9 @@
 package com.aherbel.cryptotracker
 
-import com.aherbel.cryptotracker.MainUiStateBuilder.Companion.aMainUiState
+import com.aherbel.cryptotracker.HomeUiStateBuilder.Companion.aMainUiState
 import com.aherbel.cryptotracker.MarketDataBuilder.Companion.aMarketData
 import com.aherbel.cryptotracker.application.DecimalPercentageFormatter
-import com.aherbel.cryptotracker.ui.main.MainViewModel
+import com.aherbel.cryptotracker.ui.home.HomeViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -11,13 +11,13 @@ import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
 
-class MainViewModelTest {
+class HomeViewModelTest {
 
     @get:Rule
     val testDispatcherRule = TestDispatcherRule()
 
     private val fakeMarketDataRepository = FakeMarketDataRepository()
-    private val mainViewModel = MainViewModel(fakeMarketDataRepository, DecimalPercentageFormatter())
+    private val mainViewModel = HomeViewModel(fakeMarketDataRepository, DecimalPercentageFormatter())
 
     @Test
     fun `test request market data emits initial state as first item when requested`() = runTest {

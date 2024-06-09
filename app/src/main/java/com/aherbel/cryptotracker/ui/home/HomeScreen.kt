@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker.ui.main
+package com.aherbel.cryptotracker.ui.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -14,7 +14,7 @@ import com.aherbel.cryptotracker.ui.components.TopBar
 import com.aherbel.cryptotracker.ui.theme.CryptoTrackerTheme
 
 @Composable
-fun MainScreen(marketData: MarketDataUi) {
+fun HomeScreen(marketData: MarketDataUi) {
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -32,13 +32,13 @@ fun MainScreen(marketData: MarketDataUi) {
 
 @Preview(showBackground = true)
 @Composable
-fun MainScreenPreview() {
+fun HomeScreenPreview() {
     val data = MarketDataUi(
         marketCapValue = "$1.35Tr",
         marketCapVariation = "-16.08%",
         marketCapVariationIsPositive = false
     )
     CryptoTrackerTheme {
-        MainScreen(marketData = data)
+        HomeScreen(marketData = data)
     }
 }
