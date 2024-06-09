@@ -62,7 +62,13 @@ class FakeServer {
     }
 
     fun willAnswerMarketDataWithPositiveMarketCapPercentageChange() {
-        val response = readJsonFromResources("global_metrics_positive_total_market_cap_percentage_change_response.json")
+        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
+            jsonResponse
+                .getJSONObject("data")
+                .getJSONObject("quote")
+                .getJSONObject("USD")
+                .put("total_market_cap_yesterday_percentage_change", 10)
+        }
         mockWebServer.enqueue(
             MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
         )
@@ -82,7 +88,13 @@ class FakeServer {
     }
 
     fun willAnswerMarketDataWithNegativeMarketCapPercentageChange() {
-        val response = readJsonFromResources("global_metrics_negative_total_market_cap_percentage_change_response.json")
+        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
+            jsonResponse
+                .getJSONObject("data")
+                .getJSONObject("quote")
+                .getJSONObject("USD")
+                .put("total_market_cap_yesterday_percentage_change", -10)
+        }
         mockWebServer.enqueue(
             MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
         )
