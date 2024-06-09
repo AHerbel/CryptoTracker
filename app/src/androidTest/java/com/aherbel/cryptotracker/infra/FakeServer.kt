@@ -30,9 +30,7 @@ class FakeServer {
 
     fun willAnswerDefaultMarketDataInformation() {
         val response = readJsonFromResources("global_metrics_default_response.json")
-        mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
-        )
+        configure200Response(response)
     }
 
     fun willAnswerMarketDataWithMarketCapValueOfTrillions() {
@@ -43,9 +41,7 @@ class FakeServer {
                 .getJSONObject("USD")
                 .put("total_market_cap", 1230000000000)
         }
-        mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
-        )
+        configure200Response(response)
     }
 
     fun willAnswerMarketDataWithMarketCapValueOfBillions() {
@@ -56,9 +52,7 @@ class FakeServer {
                 .getJSONObject("USD")
                 .put("total_market_cap", 1230000000)
         }
-        mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
-        )
+        configure200Response(response)
     }
 
     fun willAnswerMarketDataWithPositiveMarketCapPercentageChange() {
@@ -69,9 +63,7 @@ class FakeServer {
                 .getJSONObject("USD")
                 .put("total_market_cap_yesterday_percentage_change", 10)
         }
-        mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
-        )
+        configure200Response(response)
     }
 
     fun requestShouldContainsNonEmptyApiKeyHeader() {
@@ -95,6 +87,10 @@ class FakeServer {
                 .getJSONObject("USD")
                 .put("total_market_cap_yesterday_percentage_change", -10)
         }
+        configure200Response(response)
+    }
+
+    private fun configure200Response(response: String) {
         mockWebServer.enqueue(
             MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
         )
