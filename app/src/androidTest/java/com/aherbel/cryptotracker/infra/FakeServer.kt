@@ -21,8 +21,11 @@ class FakeServer {
         mockWebServer.shutdown()
     }
 
-    private fun readJsonFromResources(file: String): String? {
-        return javaClass.classLoader?.getResourceAsStream(file)?.reader().use { it?.readText() }
+    private fun readJsonFromResources(file: String, configure: (JSONObject) -> Unit = {}): String {
+        val rawResponse = javaClass.classLoader?.getResourceAsStream(file)?.reader().use { it?.readText() }
+        val jsonResponse = JSONObject(rawResponse.orEmpty())
+        configure(jsonResponse)
+        return jsonResponse.toString()
     }
 
     fun willAnswerDefaultMarketDataInformation() {
@@ -33,28 +36,28 @@ class FakeServer {
     }
 
     fun willAnswerMarketDataWithMarketCapValueOfTrillions() {
-        val rawResponse = readJsonFromResources("global_metrics_default_response.json")
-        val jsonResponse = JSONObject(rawResponse.orEmpty())
-        jsonResponse
-            .getJSONObject("data")
-            .getJSONObject("quote")
-            .getJSONObject("USD")
-            .put("total_market_cap", 123000000000000)
+        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
+            jsonResponse
+                .getJSONObject("data")
+                .getJSONObject("quote")
+                .getJSONObject("USD")
+                .put("total_market_cap", 1230000000000)
+        }
         mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(jsonResponse.toString())
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
         )
     }
 
     fun willAnswerMarketDataWithMarketCapValueOfBillions() {
-        val rawResponse = readJsonFromResources("global_metrics_default_response.json")
-        val jsonResponse = JSONObject(rawResponse.orEmpty())
-        jsonResponse
-            .getJSONObject("data")
-            .getJSONObject("quote")
-            .getJSONObject("USD")
-            .put("total_market_cap", 123000000000)
+        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
+            jsonResponse
+                .getJSONObject("data")
+                .getJSONObject("quote")
+                .getJSONObject("USD")
+                .put("total_market_cap", 1230000000)
+        }
         mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(jsonResponse.toString())
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
         )
     }
 

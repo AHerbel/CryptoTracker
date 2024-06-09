@@ -77,7 +77,7 @@ class HomeActivityTest {
         ActivityScenario.launch(HomeActivity::class.java)
 
         homeScreen(composeRule) {
-            displaysMarketCapValue("$123.00T")
+            displaysMarketCapValue("$1.23T")
         }
     }
 
@@ -88,7 +88,7 @@ class HomeActivityTest {
         ActivityScenario.launch(HomeActivity::class.java)
 
         homeScreen(composeRule) {
-            displaysMarketCapValue("$123.00B")
+            displaysMarketCapValue("$1.23B")
         }
     }
 }
