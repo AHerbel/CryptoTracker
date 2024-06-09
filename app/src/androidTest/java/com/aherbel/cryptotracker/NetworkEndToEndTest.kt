@@ -32,7 +32,7 @@ class NetworkEndToEndTest {
     fun testNetworkRequestIncludeNonEmptyApiKeyHeader() {
         fakeServer.willAnswerDefaultMarketDataInformation()
 
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(HomeActivity::class.java)
 
         fakeServer.requestShouldContainsNonEmptyApiKeyHeader()
     }

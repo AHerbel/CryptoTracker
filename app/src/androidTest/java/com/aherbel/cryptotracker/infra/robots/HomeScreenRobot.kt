@@ -10,12 +10,12 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.unit.dp
 import com.aherbel.cryptotracker.matchers.assertTextColor
 
-fun mainScreen(
+fun homeScreen(
     composeTestRule: ComposeTestRule,
-    block: MainScreenRobot.() -> Unit
-) = MainScreenRobot(composeTestRule).apply(block)
+    block: HomeScreenRobot.() -> Unit
+) = HomeScreenRobot(composeTestRule).apply(block)
 
-class MainScreenRobot(composeTestRule: ComposeTestRule) {
+class HomeScreenRobot(composeTestRule: ComposeTestRule) {
 
     private val infoButton = composeTestRule.onNodeWithContentDescription("Info")
     private val livePricesText = composeTestRule.onNodeWithContentDescription("LivePrices")

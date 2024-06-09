@@ -5,7 +5,7 @@ import androidx.test.core.app.ActivityScenario
 import com.aherbel.cryptotracker.application.di.NetworkConfigurationModule
 import com.aherbel.cryptotracker.infra.FakeServer
 import com.aherbel.cryptotracker.infra.FakeServerRule
-import com.aherbel.cryptotracker.infra.robots.mainScreen
+import com.aherbel.cryptotracker.infra.robots.homeScreen
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -19,7 +19,7 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltAndroidTest
 @UninstallModules(NetworkConfigurationModule::class)
-class MainActivityTest {
+class HomeActivityTest {
 
     @get:Rule(order = 0)
     val hiltAndroidRule = HiltAndroidRule(this)
@@ -41,9 +41,9 @@ class MainActivityTest {
     fun testHeaderIsDisplayed() {
         fakeServer.willAnswerDefaultMarketDataInformation()
 
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(HomeActivity::class.java)
 
-        mainScreen(composeRule) {
+        homeScreen(composeRule) {
             displaysHeader()
         }
     }
@@ -52,9 +52,9 @@ class MainActivityTest {
     fun testMarketDataIsDisplayed() {
         fakeServer.willAnswerMarketDataInformation()
 
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(HomeActivity::class.java)
 
-        mainScreen(composeRule) {
+        homeScreen(composeRule) {
             displaysMarketData()
             displaysMarketCap("$123.00Tr", "-16.08%")
         }
@@ -64,9 +64,9 @@ class MainActivityTest {
     fun testDisplaysPositiveMarketCapVariation() = runTest {
         fakeServer.willAnswerMarketDataWithPositiveMarketCapPercentageChange()
 
-        ActivityScenario.launch(MainActivity::class.java)
+        ActivityScenario.launch(HomeActivity::class.java)
 
-        mainScreen(composeRule) {
+        homeScreen(composeRule) {
             displaysPositiveMarketCapVariation("10%")
         }
     }

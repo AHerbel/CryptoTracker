@@ -12,7 +12,7 @@ import com.aherbel.cryptotracker.ui.theme.CryptoTrackerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
