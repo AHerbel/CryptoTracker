@@ -6,10 +6,10 @@ data class GlobalMetricsResponse(val quote: Quote)
 
 data class Quote(
     @SerializedName("USD")
-    val usd: USD
+    val currency: Currency
 )
 
-data class USD(
+data class Currency(
     @SerializedName("total_market_cap")
     val totalMarketCap: Double,
     @SerializedName("total_market_cap_yesterday_percentage_change")

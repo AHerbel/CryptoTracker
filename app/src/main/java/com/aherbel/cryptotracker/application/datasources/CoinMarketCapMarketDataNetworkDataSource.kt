@@ -18,8 +18,8 @@ class CoinMarketCapMarketDataNetworkDataSource @Inject constructor(
 
         send(
             MarketData(
-                marketCapValue = data.quote.usd.totalMarketCap,
-                marketCapVariation = data.quote.usd.totalMarketCapYesterdayPercentageChange
+                marketCapValue = data.quote.currency.totalMarketCap,
+                marketCapVariation = data.quote.currency.totalMarketCapYesterdayPercentageChange
             )
         )
 
