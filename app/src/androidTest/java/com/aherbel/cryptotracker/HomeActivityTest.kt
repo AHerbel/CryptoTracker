@@ -49,6 +49,17 @@ class HomeActivityTest {
     }
 
     @Test
+    fun open_homeScreen_displaysTitle() {
+        fakeServer.willAnswerDefaultMarketDataInformation()
+
+        ActivityScenario.launch(HomeActivity::class.java)
+
+        homeScreen(composeRule) {
+            displaysTitle("Live Prices")
+        }
+    }
+
+    @Test
     fun open_homeScreen_displaysMarketData() {
         fakeServer.willAnswerMarketDataInformation()
 

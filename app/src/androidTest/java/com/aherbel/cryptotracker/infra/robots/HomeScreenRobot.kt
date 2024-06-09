@@ -99,4 +99,10 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
             .assertIsDisplayed()
     }
 
+    fun displaysTitle(title: String) {
+        livePricesText
+            .assertIsDisplayed()
+            .assertTextEquals(title)
+    }
+
 }
