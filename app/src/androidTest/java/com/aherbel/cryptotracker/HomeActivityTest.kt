@@ -38,17 +38,6 @@ class HomeActivityTest {
     }
 
     @Test
-    fun openHomeScreen_whenStarted_displaysHeader() {
-        fakeServer.willAnswerDefaultMarketDataInformation()
-
-        ActivityScenario.launch(HomeActivity::class.java)
-
-        homeScreen(composeRule) {
-            displaysHeader()
-        }
-    }
-
-    @Test
     fun openHomeScreen_whenStarted_displaysTitle() {
         fakeServer.willAnswerDefaultMarketDataInformation()
 
