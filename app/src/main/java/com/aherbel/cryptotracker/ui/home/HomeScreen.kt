@@ -32,7 +32,20 @@ fun HomeScreen(marketData: MarketDataUi) {
 
 @Preview(showBackground = true)
 @Composable
-fun HomeScreenPreview() {
+fun HomeScreenPositiveMarketCapVariationPreview() {
+    val data = MarketDataUi(
+        marketCapValue = "$1.35Tr",
+        marketCapVariation = "16.08%",
+        marketCapVariationIsPositive = true
+    )
+    CryptoTrackerTheme {
+        HomeScreen(marketData = data)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenNegativeMarketCapVariationPreview() {
     val data = MarketDataUi(
         marketCapValue = "$1.35Tr",
         marketCapVariation = "-16.08%",
