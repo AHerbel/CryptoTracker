@@ -18,6 +18,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "com.aherbel.cryptotracker.infra.HiltTestApplicationTestRunner"
+        testInstrumentationRunnerArguments += mapOf("clearPackageData" to "true")
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -55,6 +56,10 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    @Suppress("UnstableApiUsage")
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
 }
 
 dependencies {
@@ -81,6 +86,7 @@ dependencies {
     testImplementation(libs.coroutines.test)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(platform(libs.compose.bom))
     androidTestImplementation(libs.ui.test.junit4)
@@ -88,6 +94,8 @@ dependencies {
     kspAndroidTest(libs.hilt.android.compiler)
     androidTestImplementation(libs.okhttp.mockwebserver)
     androidTestImplementation(libs.okhttp.tls)
+
+    androidTestUtil(libs.androidx.test.orchestrator)
 
     debugImplementation(libs.ui.tooling)
     debugImplementation(libs.ui.test.manifest)
