@@ -70,4 +70,15 @@ class HomeActivityTest {
             displaysPositiveMarketCapVariation("10%")
         }
     }
+
+    @Test
+    fun open_homeScreen_displaysNegativeMarketCapVariation() = runTest {
+        fakeServer.willAnswerMarketDataWithNegativeMarketCapPercentageChange()
+
+        ActivityScenario.launch(HomeActivity::class.java)
+
+        homeScreen(composeRule) {
+            displaysNegativeMarketCapVariation("-10%")
+        }
+    }
 }

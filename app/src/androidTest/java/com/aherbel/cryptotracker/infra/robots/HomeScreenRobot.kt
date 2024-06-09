@@ -90,4 +90,13 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
             .assertIsDisplayed()
     }
 
+    fun displaysNegativeMarketCapVariation(variation: String) {
+        marketCapVariation
+            .assertIsDisplayed()
+            .assertTextEquals(variation)
+            .assertTextColor(Color.Red)
+        marketCapVariationArrow
+            .assertIsDisplayed()
+    }
+
 }

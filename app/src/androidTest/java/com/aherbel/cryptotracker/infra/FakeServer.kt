@@ -58,4 +58,11 @@ class FakeServer {
         )
     }
 
+    fun willAnswerMarketDataWithNegativeMarketCapPercentageChange() {
+        val response = readJsonFromResources("global_metrics_negative_total_market_cap_percentage_change_response.json")
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
+        )
+    }
+
 }
