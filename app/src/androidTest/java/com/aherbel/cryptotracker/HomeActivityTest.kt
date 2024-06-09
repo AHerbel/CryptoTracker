@@ -38,7 +38,7 @@ class HomeActivityTest {
     }
 
     @Test
-    fun testHeaderIsDisplayed() {
+    fun open_homeScreen_displaysHeader() {
         fakeServer.willAnswerDefaultMarketDataInformation()
 
         ActivityScenario.launch(HomeActivity::class.java)
@@ -49,7 +49,7 @@ class HomeActivityTest {
     }
 
     @Test
-    fun testMarketDataIsDisplayed() {
+    fun open_homeScreen_displaysMarketData() {
         fakeServer.willAnswerMarketDataInformation()
 
         ActivityScenario.launch(HomeActivity::class.java)
@@ -61,7 +61,7 @@ class HomeActivityTest {
     }
 
     @Test
-    fun testDisplaysPositiveMarketCapVariation() = runTest {
+    fun open_homeScreen_displaysPositiveMarketCapVariation() = runTest {
         fakeServer.willAnswerMarketDataWithPositiveMarketCapPercentageChange()
 
         ActivityScenario.launch(HomeActivity::class.java)
