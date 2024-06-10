@@ -27,7 +27,7 @@ data class MarketDataUiBuilder(
     fun build(): MarketDataUi = MarketDataUi(
         marketCapValue = marketCapValue,
         marketCapVariation = marketCapVariation,
-        marketCapVariationIsPositive = marketCapVariationIsPositive
+        marketCapVariationIsPositive = marketCapVariationIsPositive,
     )
 
 }

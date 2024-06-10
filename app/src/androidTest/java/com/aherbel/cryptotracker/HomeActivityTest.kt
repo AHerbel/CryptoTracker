@@ -102,4 +102,15 @@ class HomeActivityTest {
             displaysMarketCapValue("$1.23T")
         }
     }
+
+    @Test
+    fun openHome_whenStarted_displays24HSVolume() {
+        fakeServer.willAnswer24HsVolume(262240000000.0)
+
+        ActivityScenario.launch(HomeActivity::class.java)
+
+        homeScreen(composeRule) {
+            displays24HsVolume("$262.24B")
+        }
+    }
 }

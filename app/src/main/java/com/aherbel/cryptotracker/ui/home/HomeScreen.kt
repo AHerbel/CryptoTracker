@@ -36,7 +36,8 @@ fun HomeScreenPositiveMarketCapVariationPreview() {
     val data = MarketDataUi(
         marketCapValue = "$1.35Tr",
         marketCapVariation = "16.08%",
-        marketCapVariationIsPositive = true
+        marketCapVariationIsPositive = true,
+        twentyFourHsVolume = "1.35Tr"
     )
     CryptoTrackerTheme {
         HomeScreen(marketData = data)
@@ -49,7 +50,8 @@ fun HomeScreenNegativeMarketCapVariationPreview() {
     val data = MarketDataUi(
         marketCapValue = "$1.35Tr",
         marketCapVariation = "-16.08%",
-        marketCapVariationIsPositive = false
+        marketCapVariationIsPositive = false,
+        twentyFourHsVolume = "1.35Tr"
     )
     CryptoTrackerTheme {
         HomeScreen(marketData = data)

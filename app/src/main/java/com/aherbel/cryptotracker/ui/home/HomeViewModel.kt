@@ -40,20 +40,21 @@ class HomeViewModel @Inject constructor(
     private fun mapToUi(marketData: MarketData): MarketDataUi {
         val marketCapVariation = marketData.marketCapVariation
         return MarketDataUi(
-            marketCapValue = formatMarketCapValue(marketData.marketCapValue),
+            marketCapValue = formatMoneyValue(marketData.marketCapValue),
             marketCapVariation = percentageFormatter.format(marketCapVariation),
-            marketCapVariationIsPositive = marketCapVariation > 0
+            marketCapVariationIsPositive = marketCapVariation > 0,
+            twentyFourHsVolume = formatMoneyValue(marketData.twentyFourHourVolume)
         )
     }
 
-    private fun formatMarketCapValue(marketCapValue: Double): String {
+    private fun formatMoneyValue(amount: Double): String {
         return NumberFormatter
             .with()
             .locale(Locale.US)
             .unit(Currency.getInstance(Locale.US))
             .precision(Precision.currency(Currency.CurrencyUsage.STANDARD))
             .notation(Notation.compactShort())
-            .format(marketCapValue)
+            .format(amount)
             .toString()
     }
 
@@ -68,7 +69,8 @@ class HomeViewModel @Inject constructor(
     private fun initialMarketDataUi(): MarketDataUi = MarketDataUi(
         marketCapValue = "",
         marketCapVariation = "",
-        marketCapVariationIsPositive = false
+        marketCapVariationIsPositive = false,
+        twentyFourHsVolume = ""
     )
 }
 
@@ -79,5 +81,6 @@ data class HomeUiState(
 data class MarketDataUi(
     val marketCapValue: String,
     val marketCapVariation: String,
-    val marketCapVariationIsPositive: Boolean
+    val marketCapVariationIsPositive: Boolean,
+    val twentyFourHsVolume: String
 )

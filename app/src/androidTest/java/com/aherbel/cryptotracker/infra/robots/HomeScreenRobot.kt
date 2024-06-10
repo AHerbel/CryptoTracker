@@ -18,6 +18,7 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
     private val marketCapValue = composeTestRule.onNodeWithContentDescription("MarketCapValue")
     private val marketCapVariation = composeTestRule.onNodeWithContentDescription("MarketCapVariation")
     private val marketCapVariationArrow = composeTestRule.onNodeWithContentDescription("MarketCapVariationArrow")
+    private val twentyFourHsVolumeText = composeTestRule.onNodeWithContentDescription("24HsVolumeValue")
 
     fun displaysPositiveMarketCapVariation(variation: String) {
         marketCapVariation
@@ -47,6 +48,12 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
         marketCapValue
             .assertIsDisplayed()
             .assertTextEquals(value)
+    }
+
+    fun displays24HsVolume(twentyFourHsVolume: String) {
+        twentyFourHsVolumeText
+            .assertIsDisplayed()
+            .assertTextEquals(twentyFourHsVolume)
     }
 
 }

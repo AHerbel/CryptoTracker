@@ -13,5 +13,7 @@ data class Currency(
     @SerializedName("total_market_cap")
     val totalMarketCap: Double,
     @SerializedName("total_market_cap_yesterday_percentage_change")
-    val totalMarketCapYesterdayPercentageChange: Double
+    val totalMarketCapYesterdayPercentageChange: Double,
+    @SerializedName("total_volume_24h")
+    val totalVolume24h: Double
 )

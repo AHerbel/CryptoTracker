@@ -2,4 +2,5 @@
     <string name="app_name">CryptoTracker</string>
     <string name="live_prices">Live Prices</string>
     <string name="market_cap">Market Cap</string>
+    <string name="twenty_four_hs_volume">24h Volume</string>
 </resources>

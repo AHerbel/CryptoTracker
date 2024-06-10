@@ -33,6 +33,17 @@ class FakeServer {
         configure200Response(response)
     }
 
+    fun willAnswer24HsVolume(twentyFourHsVolume: Double) {
+        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
+            jsonResponse
+                .getJSONObject("data")
+                .getJSONObject("quote")
+                .getJSONObject("USD")
+                .put("total_volume_24h", twentyFourHsVolume)
+        }
+        configure200Response(response)
+    }
+
     fun willAnswerMarketDataWithMarketCapValueOf(marketCapValue: Double) {
         val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
             jsonResponse
