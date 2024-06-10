@@ -30,10 +30,20 @@ fun MarketCap(
 
 @Preview(showBackground = true)
 @Composable
-fun MarketCapPreview() {
+fun MarketCapNegativeVariationPreview() {
     MarketCap(
         value = "$1.35Tr",
         variation = "-16.08%",
         variationIsPositive = false
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MarketCapPositiveVariationPreview() {
+    MarketCap(
+        value = "$1.35Tr",
+        variation = "16.08%",
+        variationIsPositive = true
     )
 }
