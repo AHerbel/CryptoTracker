@@ -71,13 +71,13 @@ class HomeActivityTest {
     }
 
     @Test
-    fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInTrillions() {
-        fakeServer.willAnswerMarketDataWithMarketCapValueOf(1230000000000.0)
+    fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInThousands() {
+        fakeServer.willAnswerMarketDataWithMarketCapValueOf(1230000.0)
 
         ActivityScenario.launch(HomeActivity::class.java)
 
         homeScreen(composeRule) {
-            displaysMarketCapValue("$1.23T")
+            displaysMarketCapValue("$1.23M")
         }
     }
 
@@ -89,6 +89,17 @@ class HomeActivityTest {
 
         homeScreen(composeRule) {
             displaysMarketCapValue("$1.23B")
+        }
+    }
+
+    @Test
+    fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInTrillions() {
+        fakeServer.willAnswerMarketDataWithMarketCapValueOf(1230000000000.0)
+
+        ActivityScenario.launch(HomeActivity::class.java)
+
+        homeScreen(composeRule) {
+            displaysMarketCapValue("$1.23T")
         }
     }
 }
