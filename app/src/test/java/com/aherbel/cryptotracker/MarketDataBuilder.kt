@@ -4,7 +4,8 @@ import com.aherbel.cryptotracker.domain.MarketData
 
 data class MarketDataBuilder(
     private var marketCapValue: Double = 0.0,
-    private var marketCapVariation: Double = 0.0
+    private var marketCapVariation: Double = 0.0,
+    private var twentyFourHourVolume: Double = 0.0
 ) {
 
     companion object {
@@ -19,8 +20,13 @@ data class MarketDataBuilder(
         return copy(marketCapVariation = marketCapVariation)
     }
 
+    fun with24HsVolume(twentyFourHourVolume: Double): MarketDataBuilder {
+        return copy(twentyFourHourVolume = twentyFourHourVolume)
+    }
+
     fun build(): MarketData = MarketData(
         marketCapValue = marketCapValue,
-        marketCapVariation = marketCapVariation
+        marketCapVariation = marketCapVariation,
+        twentyFourHourVolume = twentyFourHourVolume
     )
 }

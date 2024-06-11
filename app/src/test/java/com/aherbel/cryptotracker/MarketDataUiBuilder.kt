@@ -5,7 +5,8 @@ import com.aherbel.cryptotracker.ui.home.MarketDataUi
 data class MarketDataUiBuilder(
     private var marketCapValue: String = "",
     private var marketCapVariation: String = "",
-    private var marketCapVariationIsPositive: Boolean = false
+    private var marketCapVariationIsPositive: Boolean = false,
+    private var twentyFourHsVolume: String = ""
 ) {
 
     companion object {
@@ -24,10 +25,15 @@ data class MarketDataUiBuilder(
         return copy(marketCapVariationIsPositive = marketCapVariationIsPositive)
     }
 
+    fun with24HsVolume(twentyFourHsVolume: String): MarketDataUiBuilder {
+        return copy(twentyFourHsVolume = twentyFourHsVolume)
+    }
+
     fun build(): MarketDataUi = MarketDataUi(
         marketCapValue = marketCapValue,
         marketCapVariation = marketCapVariation,
         marketCapVariationIsPositive = marketCapVariationIsPositive,
+        twentyFourHsVolume = twentyFourHsVolume
     )
 
 }
