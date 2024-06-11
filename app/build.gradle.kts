@@ -11,6 +11,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
+        testInstrumentationRunnerArguments += mapOf("clearPackageData" to "true")
         applicationId = "com.aherbel.cryptotracker"
         minSdk = 21
         targetSdk = 34
@@ -18,7 +19,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "com.aherbel.cryptotracker.infra.HiltTestApplicationTestRunner"
-        testInstrumentationRunnerArguments += mapOf("clearPackageData" to "true")
         vectorDrawables {
             useSupportLibrary = true
         }
