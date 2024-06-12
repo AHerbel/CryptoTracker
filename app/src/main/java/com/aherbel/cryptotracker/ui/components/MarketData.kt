@@ -26,7 +26,9 @@ fun MarketData(marketData: MarketDataUi) {
             variation = marketData.marketCapVariation,
             variationIsPositive = marketData.marketCapVariationIsPositive
         )
-        TwentyFourHsVolume(marketData.twentyFourHsVolume)
+        TwentyFourHsVolume(
+            twentyForHsValue = marketData.twentyFourHsVolume
+        )
     }
 }
 
