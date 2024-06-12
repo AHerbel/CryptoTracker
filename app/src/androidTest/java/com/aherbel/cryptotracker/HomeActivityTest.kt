@@ -1,8 +1,8 @@
 package com.aherbel.cryptotracker
 
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.test.core.app.ActivityScenario
 import com.aherbel.cryptotracker.application.di.NetworkConfigurationModule
+import com.aherbel.cryptotracker.infra.FakeApplication
 import com.aherbel.cryptotracker.infra.FakeServer
 import com.aherbel.cryptotracker.infra.FakeServerRule
 import com.aherbel.cryptotracker.infra.robots.homeScreen
@@ -31,6 +31,7 @@ class HomeActivityTest {
     val fakeServerRule = FakeServerRule()
 
     private val fakeServer: FakeServer get() = fakeServerRule.fakeServer
+    private val fakeApplication = FakeApplication()
 
     @Before
     fun setup() {
@@ -41,7 +42,7 @@ class HomeActivityTest {
     fun openHomeScreen_whenStarted_displaysTitle() {
         fakeServer.willAnswerDefaultMarketDataInformation()
 
-        ActivityScenario.launch(HomeActivity::class.java)
+        fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
             displaysTitle("Live Prices")
@@ -52,7 +53,7 @@ class HomeActivityTest {
     fun openHomeScreen_whenStarted_displaysPositiveMarketCapVariation() = runTest {
         fakeServer.willAnswerMarketDataWithMarketCapPercentageChange(10)
 
-        ActivityScenario.launch(HomeActivity::class.java)
+        fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
             displaysPositiveMarketCapVariation("10%")
@@ -63,7 +64,7 @@ class HomeActivityTest {
     fun openHomeScreen_whenStarted_displaysNegativeMarketCapVariation() = runTest {
         fakeServer.willAnswerMarketDataWithMarketCapPercentageChange(-10)
 
-        ActivityScenario.launch(HomeActivity::class.java)
+        fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
             displaysNegativeMarketCapVariation("-10%")
@@ -74,7 +75,7 @@ class HomeActivityTest {
     fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInThousands() {
         fakeServer.willAnswerMarketDataWithMarketCapValueOf(1230000.0)
 
-        ActivityScenario.launch(HomeActivity::class.java)
+        fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
             displaysMarketCapValue("$1.23M")
@@ -85,7 +86,7 @@ class HomeActivityTest {
     fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInBillions() {
         fakeServer.willAnswerMarketDataWithMarketCapValueOf(1230000000.0)
 
-        ActivityScenario.launch(HomeActivity::class.java)
+        fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
             displaysMarketCapValue("$1.23B")
@@ -96,7 +97,7 @@ class HomeActivityTest {
     fun openHomeScreen_whenStarted_displayFormattedMarketCapValueInTrillions() {
         fakeServer.willAnswerMarketDataWithMarketCapValueOf(1230000000000.0)
 
-        ActivityScenario.launch(HomeActivity::class.java)
+        fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
             displaysMarketCapValue("$1.23T")
@@ -107,7 +108,7 @@ class HomeActivityTest {
     fun openHome_whenStarted_displays24HSVolume() {
         fakeServer.willAnswer24HsVolume(262240000000.0)
 
-        ActivityScenario.launch(HomeActivity::class.java)
+        fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
             displays24HsVolume("$262.24B")
