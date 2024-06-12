@@ -29,7 +29,9 @@ fun MarketData(marketData: MarketDataUi) {
         TwentyFourHsVolume(
             twentyForHsValue = marketData.twentyFourHsVolume
         )
-        BTCDominance(marketData.btcDominance)
+        BTCDominance(
+            btcDominance = marketData.btcDominance
+        )
     }
 }
 
