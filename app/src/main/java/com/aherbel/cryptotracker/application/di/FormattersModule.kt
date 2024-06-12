@@ -1,6 +1,8 @@
 package com.aherbel.cryptotracker.application.di
 
+import com.aherbel.cryptotracker.USCurrencyFormatter
 import com.aherbel.cryptotracker.application.DecimalPercentageFormatter
+import com.aherbel.cryptotracker.domain.CurrencyFormatter
 import com.aherbel.cryptotracker.domain.PercentageFormatter
 import dagger.Module
 import dagger.Provides
@@ -14,4 +16,8 @@ class FormattersModule {
     @Provides
     fun providesDecimalPercentageFormatter(): PercentageFormatter =
         DecimalPercentageFormatter()
+
+    @Provides
+    fun providesCurrencyFormatter(): CurrencyFormatter =
+        USCurrencyFormatter()
 }
