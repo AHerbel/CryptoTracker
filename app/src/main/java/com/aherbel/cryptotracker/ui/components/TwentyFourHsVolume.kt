@@ -11,6 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aherbel.cryptotracker.R
@@ -37,4 +38,10 @@ fun TwentyFourHsVolume(twentyForHsValue: String) {
             modifier = Modifier.semantics { contentDescription = "24HsVolumeValue" }
         )
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TwentyForHsVolumePreview() {
+    TwentyFourHsVolume("$252.53M")
 }
