@@ -14,10 +14,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.aherbel.cryptotracker.R
-import com.aherbel.cryptotracker.ui.home.MarketDataUi
 
 @Composable
-fun TwentyFourHsVolume(marketData: MarketDataUi) {
+fun TwentyFourHsVolume(twentyForHsValue: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
@@ -32,7 +31,7 @@ fun TwentyFourHsVolume(marketData: MarketDataUi) {
             modifier = Modifier.semantics { contentDescription = "24HsVolume" }
         )
         Text(
-            text = marketData.twentyFourHsVolume,
+            text = twentyForHsValue,
             color = Color.Gray,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.semantics { contentDescription = "24HsVolumeValue" }
