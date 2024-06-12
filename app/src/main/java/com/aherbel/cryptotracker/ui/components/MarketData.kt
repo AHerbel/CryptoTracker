@@ -1,7 +1,9 @@
 package com.aherbel.cryptotracker.ui.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,7 +22,13 @@ import com.aherbel.cryptotracker.ui.home.MarketDataUi
 
 @Composable
 fun MarketData(marketData: MarketDataUi) {
-    Row(modifier = Modifier.semantics { contentDescription = "MarketData" }) {
+    Row(
+        modifier = Modifier
+            .semantics { contentDescription = "MarketData" }
+            .padding(horizontal = 15.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceEvenly
+    ) {
         MarketCap(
             value = marketData.marketCapValue,
             variation = marketData.marketCapVariation,
