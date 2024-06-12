@@ -16,9 +16,7 @@ import com.aherbel.cryptotracker.R
 fun TwentyFourHsVolume(twentyForHsValue: String) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .semantics { contentDescription = "24HsVolumeContainer" }
-            .padding(horizontal = 15.dp)
+        modifier = Modifier.padding(horizontal = 15.dp)
     ) {
         Title(
             title = stringResource(id = R.string.twenty_four_hs_volume),

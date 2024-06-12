@@ -85,4 +85,13 @@ class FakeServer {
         )
     }
 
+    fun willAnswerBTCDominance(btcDominance: Int) {
+        val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
+            jsonResponse
+                .getJSONObject("data")
+                .put("btc_dominance", btcDominance)
+        }
+        configure200Response(response)
+    }
+
 }

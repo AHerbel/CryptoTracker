@@ -4,4 +4,5 @@ data class MarketData(
     val marketCapValue: Double,
     val marketCapVariation: Double,
     val twentyFourHourVolume: Double,
+    val btcDominance: Double,
 )

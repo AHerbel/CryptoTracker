@@ -6,7 +6,8 @@ data class MarketDataUiBuilder(
     private var marketCapValue: String = "",
     private var marketCapVariation: String = "",
     private var marketCapVariationIsPositive: Boolean = false,
-    private var twentyFourHsVolume: String = ""
+    private var twentyFourHsVolume: String = "",
+    private var btcDominance: String = ""
 ) {
 
     companion object {
@@ -29,11 +30,16 @@ data class MarketDataUiBuilder(
         return copy(twentyFourHsVolume = twentyFourHsVolume)
     }
 
+    fun withBtcDominance(btcDominance: String): MarketDataUiBuilder {
+        return copy(btcDominance = btcDominance)
+    }
+
     fun build(): MarketDataUi = MarketDataUi(
         marketCapValue = marketCapValue,
         marketCapVariation = marketCapVariation,
         marketCapVariationIsPositive = marketCapVariationIsPositive,
-        twentyFourHsVolume = twentyFourHsVolume
+        twentyFourHsVolume = twentyFourHsVolume,
+        btcDominance = ""
     )
 
 }

@@ -11,5 +11,11 @@ class DecimalPercentageFormatter : PercentageFormatter {
         positiveSuffix = "%"
         negativeSuffix = "%"
     }
+
+    override fun setMinPrecisionDigits(digits: Int) {
+        if (digits < 0) throw IllegalArgumentException("Max precision digits should be positive")
+        decimalFormatter.minimumFractionDigits = digits
+    }
+
     override fun format(value: Double): String = decimalFormatter.format(value)
 }

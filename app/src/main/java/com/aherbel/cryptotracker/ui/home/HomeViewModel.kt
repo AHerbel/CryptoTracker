@@ -40,7 +40,10 @@ class HomeViewModel @Inject constructor(
             marketCapValue = currencyFormatter.format(marketData.marketCapValue),
             marketCapVariation = percentageFormatter.format(marketCapVariation),
             marketCapVariationIsPositive = marketCapVariation > 0,
-            twentyFourHsVolume = currencyFormatter.format(marketData.twentyFourHourVolume)
+            twentyFourHsVolume = currencyFormatter.format(marketData.twentyFourHourVolume),
+            btcDominance = percentageFormatter.apply {
+                setMinPrecisionDigits(2)
+            }.format(marketData.btcDominance)
         )
     }
 
@@ -56,7 +59,8 @@ class HomeViewModel @Inject constructor(
         marketCapValue = "",
         marketCapVariation = "",
         marketCapVariationIsPositive = false,
-        twentyFourHsVolume = ""
+        twentyFourHsVolume = "",
+        btcDominance = ""
     )
 }
 
@@ -68,5 +72,6 @@ data class MarketDataUi(
     val marketCapValue: String,
     val marketCapVariation: String,
     val marketCapVariationIsPositive: Boolean,
-    val twentyFourHsVolume: String
+    val twentyFourHsVolume: String,
+    val btcDominance: String
 )

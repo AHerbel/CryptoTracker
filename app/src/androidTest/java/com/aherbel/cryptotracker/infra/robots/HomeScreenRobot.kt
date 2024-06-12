@@ -19,6 +19,8 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
     private val marketCapVariation = composeTestRule.onNodeWithContentDescription("MarketCapVariation")
     private val marketCapVariationArrow = composeTestRule.onNodeWithContentDescription("MarketCapVariationArrow")
     private val twentyFourHsVolumeText = composeTestRule.onNodeWithContentDescription("24HsVolumeValue")
+    private val btcDominanceTitle = composeTestRule.onNodeWithContentDescription("BTCDominanceTitle")
+    private val btcDominanceValue = composeTestRule.onNodeWithContentDescription("BTCDominanceValue")
 
     fun displaysPositiveMarketCapVariation(variation: String) {
         marketCapVariation
@@ -54,6 +56,13 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
         twentyFourHsVolumeText
             .assertIsDisplayed()
             .assertTextEquals(twentyFourHsVolume)
+    }
+
+    fun displaysBTCDominance(btcDominance: String) {
+        btcDominanceTitle.assertIsDisplayed()
+        btcDominanceValue
+            .assertIsDisplayed()
+            .assertTextEquals(btcDominance)
     }
 
 }

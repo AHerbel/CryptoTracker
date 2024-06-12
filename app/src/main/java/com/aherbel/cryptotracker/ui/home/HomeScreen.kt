@@ -37,7 +37,8 @@ fun HomeScreenPositiveMarketCapVariationPreview() {
         marketCapValue = "$1.35Tr",
         marketCapVariation = "16.08%",
         marketCapVariationIsPositive = true,
-        twentyFourHsVolume = "1.35Tr"
+        twentyFourHsVolume = "1.35Tr",
+        btcDominance = "16.08%"
     )
     CryptoTrackerTheme {
         HomeScreen(marketData = data)
@@ -51,7 +52,8 @@ fun HomeScreenNegativeMarketCapVariationPreview() {
         marketCapValue = "$1.35Tr",
         marketCapVariation = "-16.08%",
         marketCapVariationIsPositive = false,
-        twentyFourHsVolume = "1.35Tr"
+        twentyFourHsVolume = "1.35Tr",
+        btcDominance = "-16.08%"
     )
     CryptoTrackerTheme {
         HomeScreen(marketData = data)

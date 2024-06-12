@@ -13,14 +13,15 @@ class CoinMarketCapMarketDataNetworkDataSource @Inject constructor(
 ) : MarketDataNetworkDataSource {
 
     override fun marketData(): Flow<MarketData> = callbackFlow {
-        val globalMetricsResponse = coinMarketCapService.getLatestGlobalMetrics()
-        val currency = globalMetricsResponse.data.quote.currency
+        val globalMetricsResponse = coinMarketCapService.getLatestGlobalMetrics().data
+        val currency = globalMetricsResponse.quote.currency
 
         send(
             MarketData(
                 marketCapValue = currency.totalMarketCap,
                 marketCapVariation = currency.totalMarketCapYesterdayPercentageChange,
-                twentyFourHourVolume = currency.totalVolume24h
+                twentyFourHourVolume = currency.totalVolume24h,
+                btcDominance = globalMetricsResponse.btcDominance
             )
         )
 

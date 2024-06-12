@@ -114,4 +114,15 @@ class HomeActivityTest {
             displays24HsVolume("$262.24B")
         }
     }
+
+    @Test
+    fun openHome_whenStarted_displaysBTCDominance() {
+        fakeServer.willAnswerBTCDominance(45)
+
+        fakeApplication.launchHomeScreen()
+
+        homeScreen(composeRule) {
+            displaysBTCDominance("45.00%")
+        }
+    }
 }

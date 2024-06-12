@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -18,9 +16,7 @@ fun MarketCap(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .semantics { contentDescription = "MarketCapContainer" }
-            .padding(horizontal = 15.dp)
+        modifier = Modifier.padding(horizontal = 15.dp)
     ) {
         MarketCapTitle()
         MarketCapValue(value)

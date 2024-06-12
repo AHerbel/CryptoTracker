@@ -1,5 +1,6 @@
 {
   "data": {
+    "btc_dominance": 0,
     "quote": {
       "USD": {
         "total_market_cap": 0,

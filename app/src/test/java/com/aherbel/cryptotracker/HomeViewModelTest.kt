@@ -17,7 +17,7 @@ class HomeViewModelTest {
     val testDispatcherRule = TestDispatcherRule()
 
     private val fakeMarketDataRepository = FakeMarketDataRepository()
-    private val mainViewModel = HomeViewModel(fakeMarketDataRepository, DecimalPercentageFormatter())
+    private val mainViewModel = HomeViewModel(fakeMarketDataRepository, DecimalPercentageFormatter(), USCurrencyFormatter())
 
     @Test
     fun `test request market data emits initial state as first item when requested`() = runTest {

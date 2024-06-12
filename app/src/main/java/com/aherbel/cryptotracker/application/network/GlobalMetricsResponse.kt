@@ -2,7 +2,12 @@ package com.aherbel.cryptotracker.application.network
 
 import com.google.gson.annotations.SerializedName
 
-data class GlobalMetricsResponse(val quote: Quote)
+data class GlobalMetricsResponse(
+    @SerializedName("quote")
+    val quote: Quote,
+    @SerializedName("btc_dominance")
+    val btcDominance: Double
+)
 
 data class Quote(
     @SerializedName("USD")
