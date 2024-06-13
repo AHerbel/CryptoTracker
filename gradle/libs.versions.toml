@@ -17,6 +17,7 @@ coroutines = "1.8.0"
 icu4j = "75.1"
 androidx-test-runner = "1.5.2"
 androidx-test-orchestrator = "1.4.2"
+hamkrest = "1.8.0.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -48,6 +49,7 @@ okhttp-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver",
 okhttp-logginginterceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
 coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutines" }
 icu4j = { group = "com.ibm.icu", name = "icu4j", version.ref = "icu4j" }
+hamkrest = { group = "com.natpryce", name = "hamkrest", version.ref = "hamkrest" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

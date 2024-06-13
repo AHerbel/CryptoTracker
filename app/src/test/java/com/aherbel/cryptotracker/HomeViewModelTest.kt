@@ -3,11 +3,15 @@ package com.aherbel.cryptotracker
 import com.aherbel.cryptotracker.HomeUiStateBuilder.Companion.aMainUiState
 import com.aherbel.cryptotracker.MarketDataBuilder.Companion.aMarketData
 import com.aherbel.cryptotracker.application.DecimalPercentageFormatter
+import com.aherbel.cryptotracker.ui.home.HomeUiState
 import com.aherbel.cryptotracker.ui.home.HomeViewModel
+import com.natpryce.hamkrest.and
+import com.natpryce.hamkrest.assertion.assertThat
+import com.natpryce.hamkrest.equalTo
+import com.natpryce.hamkrest.present
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotNull
 import org.junit.Rule
 import org.junit.Test
 
@@ -25,12 +29,8 @@ class HomeViewModelTest {
 
         val mainUiState = mainViewModel.uiState.first()
         val expected = aMainUiState().build()
-        assertNotNull("Initial state is null. It should be $expected", mainUiState)
-        assertEquals(
-            "Initial state is different from expected.",
-            expected,
-            mainUiState
-        )
+
+        assertThat(mainUiState, present<HomeUiState>() and equalTo(expected))
     }
 
     @Test
