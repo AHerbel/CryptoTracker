@@ -63,7 +63,7 @@ class HomeViewModel @Inject constructor(
     )
 
     private fun errorMarketDataUi(): MarketDataUi = MarketDataUi(
-        marketCapValue = "",
+        marketCapValue = "N/A",
         marketCapVariation = "",
         marketCapVariationIsPositive = false,
         twentyFourHsVolume = "",

@@ -127,12 +127,13 @@ class HomeActivityTest {
     }
 
     @Test
-    fun openHome_whenErrorOnMarketData_displaysNotAvailableBtcDominance() {
+    fun openHome_whenErrorOnMarketData_displaysNotAvailableMarketData() {
         fakeServer.willAnswerError400OnMarketData()
 
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
+            displaysNotAvailableMarketCap()
             displaysNotAvailableBtcDominance()
         }
     }

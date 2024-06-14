@@ -18,6 +18,7 @@ fun homeScreen(
 class HomeScreenRobot(composeTestRule: ComposeTestRule) {
 
     private val livePricesText = composeTestRule.onNodeWithContentDescription("LivePrices")
+    private val marketCapTitle = composeTestRule.onNodeWithContentDescription("MarketCapTitle")
     private val marketCapValue = composeTestRule.onNodeWithContentDescription("MarketCapValue")
     private val marketCapVariation = composeTestRule.onNodeWithContentDescription("MarketCapVariation")
     private val marketCapVariationArrow = composeTestRule.onNodeWithContentDescription("MarketCapVariationArrow")
@@ -69,12 +70,23 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
     }
 
     fun displaysNotAvailableBtcDominance() {
-        val notAvailable = ApplicationProvider
-            .getApplicationContext<Context>()
-            .getString(R.string.not_available)
         btcDominanceTitle.assertIsDisplayed()
         btcDominanceValue
             .assertIsDisplayed()
-            .assertTextEquals(notAvailable)
+            .assertTextEquals(notAvailable())
+    }
+
+    private fun notAvailable(): String {
+        val notAvailable = ApplicationProvider
+            .getApplicationContext<Context>()
+            .getString(R.string.not_available)
+        return notAvailable
+    }
+
+    fun displaysNotAvailableMarketCap() {
+        marketCapTitle.assertIsDisplayed()
+        marketCapValue
+            .assertIsDisplayed()
+            .assertTextEquals(notAvailable())
     }
 }
