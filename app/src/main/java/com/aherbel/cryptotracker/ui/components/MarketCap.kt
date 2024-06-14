@@ -20,8 +20,20 @@ fun MarketCap(
     ) {
         MarketCapTitle()
         MarketCapValue(value)
-        MarketCapVariation(variation, variationIsPositive)
+        if (variation.isNotEmpty()) {
+            MarketCapVariation(variation, variationIsPositive)
+        }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun MarketCapZeroVariationPreview() {
+    MarketCap(
+        value = "$1.35Tr",
+        variation = "",
+        variationIsPositive = true
+    )
 }
 
 @Preview(showBackground = true)

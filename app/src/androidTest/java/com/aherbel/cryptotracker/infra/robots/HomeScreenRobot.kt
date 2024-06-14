@@ -89,4 +89,9 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
             .assertIsDisplayed()
             .assertTextEquals(notAvailable())
     }
+
+    fun doesNotDisplayMarketCapVariation() {
+        marketCapVariation.assertDoesNotExist()
+        marketCapVariationArrow.assertDoesNotExist()
+    }
 }

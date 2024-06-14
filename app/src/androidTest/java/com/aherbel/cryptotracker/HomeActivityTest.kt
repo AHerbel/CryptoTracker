@@ -134,6 +134,7 @@ class HomeActivityTest {
 
         homeScreen(composeRule) {
             displaysNotAvailableMarketCap()
+            doesNotDisplayMarketCapVariation()
             displaysNotAvailableBtcDominance()
         }
     }
