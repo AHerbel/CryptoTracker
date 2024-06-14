@@ -22,6 +22,7 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
     private val marketCapValue = composeTestRule.onNodeWithContentDescription("MarketCapValue")
     private val marketCapVariation = composeTestRule.onNodeWithContentDescription("MarketCapVariation")
     private val marketCapVariationArrow = composeTestRule.onNodeWithContentDescription("MarketCapVariationArrow")
+    private val twentyFourHsVolumeTitle = composeTestRule.onNodeWithContentDescription("24HsVolumeTitle")
     private val twentyFourHsVolumeText = composeTestRule.onNodeWithContentDescription("24HsVolumeValue")
     private val btcDominanceTitle = composeTestRule.onNodeWithContentDescription("BTCDominanceTitle")
     private val btcDominanceValue = composeTestRule.onNodeWithContentDescription("BTCDominanceValue")
@@ -93,5 +94,12 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
     fun doesNotDisplayMarketCapVariation() {
         marketCapVariation.assertDoesNotExist()
         marketCapVariationArrow.assertDoesNotExist()
+    }
+
+    fun displaysNotAvailable24HsVolume() {
+        twentyFourHsVolumeTitle.assertIsDisplayed()
+        twentyFourHsVolumeText
+            .assertIsDisplayed()
+            .assertTextEquals(notAvailable())
     }
 }

@@ -20,7 +20,7 @@ fun TwentyFourHsVolume(twentyForHsValue: String) {
     ) {
         Title(
             title = stringResource(id = R.string.twenty_four_hs_volume),
-            modifier = Modifier.semantics { contentDescription = "24HsVolume" }
+            modifier = Modifier.semantics { contentDescription = "24HsVolumeTitle" }
         )
         TextValue(
             value = twentyForHsValue,

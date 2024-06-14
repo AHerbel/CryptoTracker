@@ -66,7 +66,7 @@ class HomeViewModel @Inject constructor(
         marketCapValue = "N/A",
         marketCapVariation = "",
         marketCapVariationIsPositive = false,
-        twentyFourHsVolume = "",
+        twentyFourHsVolume = "N/A",
         btcDominance = "N/A"
     )
 
