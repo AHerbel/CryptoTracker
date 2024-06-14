@@ -38,6 +38,16 @@ fun MarketCapZeroVariationPreview() {
 
 @Preview(showBackground = true)
 @Composable
+fun MarketCapNotAvailablePreview() {
+    MarketCap(
+        value = "N/A",
+        variation = "",
+        variationIsPositive = false
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
 fun MarketCapNegativeVariationPreview() {
     MarketCap(
         value = "$1.35Tr",
