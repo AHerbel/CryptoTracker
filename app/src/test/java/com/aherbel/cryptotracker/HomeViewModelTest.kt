@@ -28,9 +28,11 @@ class HomeViewModelTest {
         mainViewModel.requestMarketData()
 
         val mainUiState = mainViewModel.uiState.first()
-        val expected = aMainUiState().build()
 
-        assertThat(mainUiState, present<HomeUiState>() and equalTo(expected))
+        assertThat(
+            mainUiState,
+            present<HomeUiState>() and equalTo(aMainUiState().build())
+        )
     }
 
     @Test
