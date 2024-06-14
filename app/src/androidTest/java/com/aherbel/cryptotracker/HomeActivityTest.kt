@@ -125,4 +125,15 @@ class HomeActivityTest {
             displaysBTCDominance("45.00%")
         }
     }
+
+    @Test
+    fun openHome_whenErrorOnMarketData_displaysNotAvailableBtcDominance() {
+        fakeServer.willAnswerError400OnMarketData()
+
+        fakeApplication.launchHomeScreen()
+
+        homeScreen(composeRule) {
+            displaysNotAvailableBtcDominance()
+        }
+    }
 }

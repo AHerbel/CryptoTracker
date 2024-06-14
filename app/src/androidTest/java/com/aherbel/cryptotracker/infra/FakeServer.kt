@@ -94,4 +94,14 @@ class FakeServer {
         configure200Response(response)
     }
 
+    fun willAnswerError400OnMarketData() {
+        configure400Response()
+    }
+
+    private fun configure400Response() {
+        mockWebServer.enqueue(
+            MockResponse().setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
+        )
+    }
+
 }

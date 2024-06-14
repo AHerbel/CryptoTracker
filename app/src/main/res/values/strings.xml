@@ -4,4 +4,5 @@
     <string name="market_cap">Market Cap</string>
     <string name="twenty_four_hs_volume">24h Volume</string>
     <string name="btc_dominance">BTC Dominance</string>
+    <string name="not_available">N/A</string>
 </resources>

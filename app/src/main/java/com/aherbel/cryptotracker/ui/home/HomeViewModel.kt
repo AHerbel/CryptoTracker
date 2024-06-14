@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,7 +26,13 @@ class HomeViewModel @Inject constructor(
 
     fun requestMarketData() {
         viewModelScope.launch {
-            marketDataRepository.marketData()
+            marketDataRepository
+                .marketData()
+                .catch {
+                    updateUiState { uiState ->
+                        uiState.copy(marketDataUi = errorMarketDataUi())
+                    }
+                }
                 .collect { marketData ->
                     updateUiState { uiState ->
                         uiState.copy(marketDataUi = mapToUi(marketData))
@@ -53,6 +60,14 @@ class HomeViewModel @Inject constructor(
 
     private fun initialMainUiState(): HomeUiState = HomeUiState(
         marketDataUi = initialMarketDataUi()
+    )
+
+    private fun errorMarketDataUi(): MarketDataUi = MarketDataUi(
+        marketCapValue = "",
+        marketCapVariation = "",
+        marketCapVariationIsPositive = false,
+        twentyFourHsVolume = "",
+        btcDominance = "N/A"
     )
 
     private fun initialMarketDataUi(): MarketDataUi = MarketDataUi(

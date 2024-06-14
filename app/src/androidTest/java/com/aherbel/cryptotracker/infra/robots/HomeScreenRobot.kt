@@ -1,10 +1,13 @@
 package com.aherbel.cryptotracker.infra.robots
 
+import android.content.Context
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.test.core.app.ApplicationProvider
+import com.aherbel.cryptotracker.R
 import com.aherbel.cryptotracker.matchers.assertTextColor
 
 fun homeScreen(
@@ -65,4 +68,13 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
             .assertTextEquals(btcDominance)
     }
 
+    fun displaysNotAvailableBtcDominance() {
+        val notAvailable = ApplicationProvider
+            .getApplicationContext<Context>()
+            .getString(R.string.not_available)
+        btcDominanceTitle.assertIsDisplayed()
+        btcDominanceValue
+            .assertIsDisplayed()
+            .assertTextEquals(notAvailable)
+    }
 }
