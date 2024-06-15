@@ -47,9 +47,6 @@ class HomeViewModelTest {
         val mainUiState = mainViewModel.uiState.first()
         val marketCapVariation = mainUiState.marketDataUi.marketCapVariation
 
-        assertThat(
-            marketCapVariation,
-            equalTo("10.12%")
-        )
+        assertThat(marketCapVariation, equalTo("10.12%"))
     }
 }
