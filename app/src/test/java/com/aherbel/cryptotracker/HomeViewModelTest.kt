@@ -3,16 +3,14 @@ package com.aherbel.cryptotracker
 import com.aherbel.cryptotracker.HomeUiStateBuilder.Companion.aMainUiState
 import com.aherbel.cryptotracker.MarketDataBuilder.Companion.aMarketData
 import com.aherbel.cryptotracker.application.DecimalPercentageFormatter
-import com.aherbel.cryptotracker.ui.home.HomeUiState
 import com.aherbel.cryptotracker.ui.home.HomeViewModel
-import com.natpryce.hamkrest.and
-import com.natpryce.hamkrest.assertion.assertThat
-import com.natpryce.hamkrest.equalTo
-import com.natpryce.hamkrest.present
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
+import strikt.api.expectThat
+import strikt.assertions.isEqualTo
+import strikt.assertions.isNotNull
 
 class HomeViewModelTest {
 
@@ -26,12 +24,11 @@ class HomeViewModelTest {
     fun requestMarketData_atFirstRequest_emitsInitialState() = runTest {
         mainViewModel.requestMarketData()
 
-        val mainUiState = mainViewModel.uiState.first()
+        val mainUiState = mainViewModel.uiState.firstOrNull()
 
-        assertThat(
-            mainUiState,
-            present<HomeUiState>() and equalTo(aMainUiState().build())
-        )
+        expectThat(mainUiState)
+            .isNotNull()
+            .isEqualTo(aMainUiState().build())
     }
 
     @Test
@@ -44,9 +41,15 @@ class HomeViewModelTest {
 
         mainViewModel.requestMarketData()
 
-        val mainUiState = mainViewModel.uiState.first()
-        val marketCapVariation = mainUiState.marketDataUi.marketCapVariation
+        val mainUiState = mainViewModel.uiState.firstOrNull()
 
-        assertThat(marketCapVariation, equalTo("10.12%"))
+        expectThat(mainUiState)
+            .describedAs("initial HomeUiState")
+            .isNotNull()
+            .and {
+                get { marketDataUi.marketCapVariation }
+                    .describedAs("marketCapVariation")
+                    .isEqualTo("10.12%")
+            }
     }
 }

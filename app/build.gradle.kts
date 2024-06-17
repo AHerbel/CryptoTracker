@@ -84,7 +84,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.junitparams)
     testImplementation(libs.coroutines.test)
-    testImplementation(libs.hamkrest)
+    testImplementation(libs.strikt)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
