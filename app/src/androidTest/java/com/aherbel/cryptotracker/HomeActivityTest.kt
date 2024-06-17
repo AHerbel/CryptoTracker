@@ -56,7 +56,7 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displaysPositiveMarketCapVariation("10%")
+            displaysPositiveMarketCapVariationOf("10%")
         }
     }
 
@@ -67,7 +67,7 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displaysNegativeMarketCapVariation("-10%")
+            displaysNegativeMarketCapVariationOf("-10%")
         }
     }
 
@@ -78,7 +78,7 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displaysMarketCapValue("$1.23M")
+            displaysMarketCapValueOf("$1.23M")
         }
     }
 
@@ -89,7 +89,7 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displaysMarketCapValue("$1.23B")
+            displaysMarketCapValueOf("$1.23B")
         }
     }
 
@@ -100,7 +100,7 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displaysMarketCapValue("$1.23T")
+            displaysMarketCapValueOf("$1.23T")
         }
     }
 
@@ -111,7 +111,7 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displays24HsVolume("$262.24B")
+            displays24HsVolumeOf("$262.24B")
         }
     }
 
@@ -122,7 +122,7 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displaysBTCDominance("45.00%")
+            displaysBTCDominanceOf("45.00%")
         }
     }
 

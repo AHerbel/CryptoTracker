@@ -27,7 +27,7 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
     private val btcDominanceTitle = composeTestRule.onNodeWithContentDescription("BTCDominanceTitle")
     private val btcDominanceValue = composeTestRule.onNodeWithContentDescription("BTCDominanceValue")
 
-    fun displaysPositiveMarketCapVariation(variation: String) {
+    fun displaysPositiveMarketCapVariationOf(variation: String) {
         marketCapVariation
             .assertIsDisplayed()
             .assertTextEquals(variation)
@@ -36,7 +36,7 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
             .assertIsDisplayed()
     }
 
-    fun displaysNegativeMarketCapVariation(variation: String) {
+    fun displaysNegativeMarketCapVariationOf(variation: String) {
         marketCapVariation
             .assertIsDisplayed()
             .assertTextEquals(variation)
@@ -51,19 +51,19 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
             .assertTextEquals(title)
     }
 
-    fun displaysMarketCapValue(value: String) {
+    fun displaysMarketCapValueOf(value: String) {
         marketCapValue
             .assertIsDisplayed()
             .assertTextEquals(value)
     }
 
-    fun displays24HsVolume(twentyFourHsVolume: String) {
+    fun displays24HsVolumeOf(twentyFourHsVolume: String) {
         twentyFourHsVolumeText
             .assertIsDisplayed()
             .assertTextEquals(twentyFourHsVolume)
     }
 
-    fun displaysBTCDominance(btcDominance: String) {
+    fun displaysBTCDominanceOf(btcDominance: String) {
         btcDominanceTitle.assertIsDisplayed()
         btcDominanceValue
             .assertIsDisplayed()
