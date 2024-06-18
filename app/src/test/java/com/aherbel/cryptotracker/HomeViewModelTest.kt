@@ -21,7 +21,7 @@ class HomeViewModelTest {
     private val mainViewModel = HomeViewModel(fakeMarketDataRepository, DecimalPercentageFormatter(), USCurrencyFormatter())
 
     @Test
-    fun requestMarketData_atFirstRequest_emitsInitialState() = runTest {
+    fun `asking for MarketData the first time returns initial state`() = runTest {
         mainViewModel.requestMarketData()
 
         val mainUiState = mainViewModel.uiState.firstOrNull()
@@ -32,7 +32,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun requestInitialMarketData_onMarketCapVariation_formatsItWith2DecimalPlaces() = runTest {
+    fun `marketCapVariation is formatted with 2 decimal places`() = runTest {
         fakeMarketDataRepository.items = listOf(
             aMarketData()
                 .withMarketCapVariation(10.1234)
