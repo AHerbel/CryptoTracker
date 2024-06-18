@@ -7,9 +7,11 @@ import kotlinx.coroutines.flow.flow
 
 class FakeMarketDataRepository : MarketDataRepository {
 
+    var throwError: Boolean = false
     var items: List<MarketData> = emptyList()
 
     override fun marketData(): Flow<MarketData> = flow {
+        if (throwError) throw Exception()
         items.forEach {
             emit(it)
         }

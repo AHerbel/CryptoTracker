@@ -52,4 +52,36 @@ class HomeViewModelTest {
                     .isEqualTo("10.12%")
             }
     }
+
+    @Test
+    fun `asking for MarketData returns not available when error happens`() = runTest {
+        fakeMarketDataRepository.throwError = true
+
+        mainViewModel.requestMarketData()
+
+        val mainUiState = mainViewModel.uiState.firstOrNull()
+
+        expectThat(mainUiState)
+            .describedAs("initial HomeUiState")
+            .isNotNull()
+            .and {
+                get { marketDataUi }
+                    .describedAs("marketDataUi")
+                    .and {
+                        get { marketCapVariation }
+                            .describedAs("marketCapVariation")
+                            .isEqualTo("")
+                        get { marketCapValue }
+                            .describedAs("marketCapValue")
+                            .isEqualTo("N/A")
+                        get { btcDominance }
+                            .describedAs("btcDominance")
+                            .isEqualTo("N/A")
+                        get { twentyFourHsVolume }
+                            .describedAs("24HsVolume")
+                            .isEqualTo("N/A")
+                    }
+
+            }
+    }
 }
