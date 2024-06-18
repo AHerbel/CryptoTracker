@@ -81,7 +81,6 @@ class HomeViewModelTest {
                             .describedAs("24HsVolume")
                             .isEqualTo("N/A")
                     }
-
             }
     }
 }
