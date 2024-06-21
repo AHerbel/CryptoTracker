@@ -10,6 +10,25 @@ plugins {
     alias(libs.plugins.kover)
 }
 
+kover {
+    reports {
+        filters {
+            excludes {
+                androidGeneratedClasses()
+                classes(
+                    "*_Provide*",
+                    "*_Factory",
+                    "*_HiltModules*"
+                )
+                packages(
+                    "dagger.hilt.internal.aggregatedroot.codegen",
+                    "hilt_aggregated_deps"
+                )
+            }
+        }
+    }
+}
+
 android {
     namespace = "com.aherbel.cryptotracker"
     compileSdk = 34
