@@ -1,36 +1,42 @@
 package com.aherbel.cryptotracker
 
 import com.aherbel.cryptotracker.ui.home.MarketDataUi
+import com.aherbel.cryptotracker.ui.text.PlainUiText
+import com.aherbel.cryptotracker.ui.text.UiText
 
 data class MarketDataUiBuilder(
-    private var marketCapValue: String = "",
-    private var marketCapVariation: String = "",
+    private var marketCapValue: UiText = PlainUiText(""),
+    private var marketCapVariation: UiText = PlainUiText(""),
     private var marketCapVariationIsPositive: Boolean = false,
-    private var twentyFourHsVolume: String = "",
-    private var btcDominance: String = ""
+    private var twentyFourHsVolume: UiText = PlainUiText(""),
+    private var btcDominance: UiText = PlainUiText("")
 ) {
 
     companion object {
         fun aMarketDataUi(): MarketDataUiBuilder = MarketDataUiBuilder()
     }
 
-    fun withMarketCapValue(marketCapValue: String): MarketDataUiBuilder {
+    fun withMarketCapValue(marketCapValue: UiText): MarketDataUiBuilder {
         return copy(marketCapValue = marketCapValue)
     }
 
-    fun withMarketCapVariation(marketCapVariation: String): MarketDataUiBuilder {
+    fun withMarketCapVariation(marketCapVariation: UiText): MarketDataUiBuilder {
         return copy(marketCapVariation = marketCapVariation)
     }
 
-    fun withMarketCapVariationIsPositive(marketCapVariationIsPositive: Boolean): MarketDataUiBuilder {
-        return copy(marketCapVariationIsPositive = marketCapVariationIsPositive)
+    fun withPositiveMarketCapVariation(): MarketDataUiBuilder {
+        return copy(marketCapVariationIsPositive = true)
     }
 
-    fun with24HsVolume(twentyFourHsVolume: String): MarketDataUiBuilder {
+    fun withNegativeMarketCapVariation(): MarketDataUiBuilder {
+        return copy(marketCapVariationIsPositive = false)
+    }
+
+    fun with24HsVolume(twentyFourHsVolume: UiText): MarketDataUiBuilder {
         return copy(twentyFourHsVolume = twentyFourHsVolume)
     }
 
-    fun withBtcDominance(btcDominance: String): MarketDataUiBuilder {
+    fun withBtcDominance(btcDominance: UiText): MarketDataUiBuilder {
         return copy(btcDominance = btcDominance)
     }
 
@@ -39,7 +45,7 @@ data class MarketDataUiBuilder(
         marketCapVariation = marketCapVariation,
         marketCapVariationIsPositive = marketCapVariationIsPositive,
         twentyFourHsVolume = twentyFourHsVolume,
-        btcDominance = ""
+        btcDominance = btcDominance
     )
 
 }

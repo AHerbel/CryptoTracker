@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.aherbel.cryptotracker.ui.components.MarketData
 import com.aherbel.cryptotracker.ui.components.TopBar
+import com.aherbel.cryptotracker.ui.text.PlainUiText
 import com.aherbel.cryptotracker.ui.theme.CryptoTrackerTheme
 
 @Composable
@@ -34,11 +35,11 @@ fun HomeScreen(marketData: MarketDataUi) {
 @Composable
 fun HomeScreenPositiveMarketCapVariationPreview() {
     val data = MarketDataUi(
-        marketCapValue = "$1.35Tr",
-        marketCapVariation = "16.08%",
+        marketCapValue = PlainUiText("$1.35Tr"),
+        marketCapVariation = PlainUiText("16.08%"),
         marketCapVariationIsPositive = true,
-        twentyFourHsVolume = "1.35Tr",
-        btcDominance = "16.08%"
+        twentyFourHsVolume = PlainUiText("1.35Tr"),
+        btcDominance = PlainUiText("16.08%")
     )
     CryptoTrackerTheme {
         HomeScreen(marketData = data)
@@ -49,11 +50,11 @@ fun HomeScreenPositiveMarketCapVariationPreview() {
 @Composable
 fun HomeScreenNegativeMarketCapVariationPreview() {
     val data = MarketDataUi(
-        marketCapValue = "$1.35Tr",
-        marketCapVariation = "-16.08%",
+        marketCapValue = PlainUiText("$1.35Tr"),
+        marketCapVariation = PlainUiText("-16.08%"),
         marketCapVariationIsPositive = false,
-        twentyFourHsVolume = "1.35Tr",
-        btcDominance = "-16.08%"
+        twentyFourHsVolume = PlainUiText("1.35Tr"),
+        btcDominance = PlainUiText("-16.08%")
     )
     CryptoTrackerTheme {
         HomeScreen(marketData = data)

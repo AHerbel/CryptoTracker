@@ -1,7 +1,9 @@
 package com.aherbel.cryptotracker
 
+import com.aherbel.cryptotracker.AndroidResourceUiTextDataBuilder.Companion.anAndroidResourceUiText
 import com.aherbel.cryptotracker.HomeUiStateBuilder.Companion.aMainUiState
 import com.aherbel.cryptotracker.MarketDataBuilder.Companion.aMarketData
+import com.aherbel.cryptotracker.PlainUiTextDataBuilder.Companion.aPlainUiText
 import com.aherbel.cryptotracker.application.DecimalPercentageFormatter
 import com.aherbel.cryptotracker.ui.home.HomeViewModel
 import kotlinx.coroutines.flow.firstOrNull
@@ -49,7 +51,7 @@ class HomeViewModelTest {
             .and {
                 get { marketDataUi.marketCapVariation }
                     .describedAs("marketCapVariation")
-                    .isEqualTo("10.12%")
+                    .isEqualTo(aPlainUiText().withText("10.12%").build())
             }
     }
 
@@ -60,6 +62,7 @@ class HomeViewModelTest {
         mainViewModel.requestMarketData()
 
         val mainUiState = mainViewModel.uiState.firstOrNull()
+        val notAvailableText = anAndroidResourceUiText().withTextRes(R.string.not_available).build()
 
         expectThat(mainUiState)
             .describedAs("initial HomeUiState")
@@ -70,16 +73,16 @@ class HomeViewModelTest {
                     .and {
                         get { marketCapVariation }
                             .describedAs("marketCapVariation")
-                            .isEqualTo("")
+                            .isEqualTo(aPlainUiText().build())
                         get { marketCapValue }
                             .describedAs("marketCapValue")
-                            .isEqualTo("N/A")
+                            .isEqualTo(notAvailableText)
                         get { btcDominance }
                             .describedAs("btcDominance")
-                            .isEqualTo("N/A")
+                            .isEqualTo(notAvailableText)
                         get { twentyFourHsVolume }
                             .describedAs("24HsVolume")
-                            .isEqualTo("N/A")
+                            .isEqualTo(notAvailableText)
                     }
             }
     }

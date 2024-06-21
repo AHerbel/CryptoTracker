@@ -6,11 +6,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.aherbel.cryptotracker.ui.home.MarketDataUi
+import com.aherbel.cryptotracker.ui.text.PlainUiText
+import com.aherbel.cryptotracker.ui.text.resolve
 
 @Composable
 fun MarketData(marketData: MarketDataUi) {
@@ -21,16 +24,17 @@ fun MarketData(marketData: MarketDataUi) {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceEvenly
     ) {
+        val context = LocalContext.current
         MarketCap(
-            value = marketData.marketCapValue,
-            variation = marketData.marketCapVariation,
+            value = marketData.marketCapValue.resolve(context),
+            variation = marketData.marketCapVariation.resolve(context),
             variationIsPositive = marketData.marketCapVariationIsPositive
         )
         TwentyFourHsVolume(
-            twentyForHsValue = marketData.twentyFourHsVolume
+            twentyForHsValue = marketData.twentyFourHsVolume.resolve(context)
         )
         BTCDominance(
-            btcDominance = marketData.btcDominance
+            btcDominance = marketData.btcDominance.resolve(context)
         )
     }
 }
@@ -39,11 +43,11 @@ fun MarketData(marketData: MarketDataUi) {
 @Composable
 fun MarketDataPreview() {
     val data = MarketDataUi(
-        marketCapValue = "$1.35Tr",
-        marketCapVariation = "-16.08%",
+        marketCapValue = PlainUiText("$1.35Tr"),
+        marketCapVariation = PlainUiText("-16.08%"),
         marketCapVariationIsPositive = false,
-        twentyFourHsVolume = "$262.24B",
-        btcDominance = "45.00%"
+        twentyFourHsVolume = PlainUiText("$262.24B"),
+        btcDominance = PlainUiText("45.00%")
     )
     MarketData(marketData = data)
 }

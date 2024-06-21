@@ -2,10 +2,14 @@ package com.aherbel.cryptotracker.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aherbel.cryptotracker.R
 import com.aherbel.cryptotracker.domain.CurrencyFormatter
 import com.aherbel.cryptotracker.domain.MarketData
 import com.aherbel.cryptotracker.domain.MarketDataRepository
 import com.aherbel.cryptotracker.domain.PercentageFormatter
+import com.aherbel.cryptotracker.ui.text.AndroidResourceUiText
+import com.aherbel.cryptotracker.ui.text.PlainUiText
+import com.aherbel.cryptotracker.ui.text.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,13 +48,15 @@ class HomeViewModel @Inject constructor(
     private fun mapToUi(marketData: MarketData): MarketDataUi {
         val marketCapVariation = marketData.marketCapVariation
         return MarketDataUi(
-            marketCapValue = currencyFormatter.format(marketData.marketCapValue),
-            marketCapVariation = percentageFormatter.format(marketCapVariation),
+            marketCapValue = PlainUiText(currencyFormatter.format(marketData.marketCapValue)),
+            marketCapVariation = PlainUiText(percentageFormatter.format(marketCapVariation)),
             marketCapVariationIsPositive = marketCapVariation > 0,
-            twentyFourHsVolume = currencyFormatter.format(marketData.twentyFourHourVolume),
-            btcDominance = percentageFormatter.apply {
-                setMinPrecisionDigits(2)
-            }.format(marketData.btcDominance)
+            twentyFourHsVolume = PlainUiText(currencyFormatter.format(marketData.twentyFourHourVolume)),
+            btcDominance = PlainUiText(
+                percentageFormatter.apply {
+                    setMinPrecisionDigits(2)
+                }.format(marketData.btcDominance)
+            )
         )
     }
 
@@ -63,19 +69,19 @@ class HomeViewModel @Inject constructor(
     )
 
     private fun errorMarketDataUi(): MarketDataUi = MarketDataUi(
-        marketCapValue = "N/A",
-        marketCapVariation = "",
+        marketCapValue = AndroidResourceUiText(R.string.not_available),
+        marketCapVariation = PlainUiText(""),
         marketCapVariationIsPositive = false,
-        twentyFourHsVolume = "N/A",
-        btcDominance = "N/A"
+        twentyFourHsVolume = AndroidResourceUiText(R.string.not_available),
+        btcDominance = AndroidResourceUiText(R.string.not_available)
     )
 
     private fun initialMarketDataUi(): MarketDataUi = MarketDataUi(
-        marketCapValue = "",
-        marketCapVariation = "",
+        marketCapValue = PlainUiText(""),
+        marketCapVariation = PlainUiText(""),
         marketCapVariationIsPositive = false,
-        twentyFourHsVolume = "",
-        btcDominance = ""
+        twentyFourHsVolume = PlainUiText(""),
+        btcDominance = PlainUiText("")
     )
 }
 
@@ -84,9 +90,9 @@ data class HomeUiState(
 )
 
 data class MarketDataUi(
-    val marketCapValue: String,
-    val marketCapVariation: String,
+    val marketCapValue: UiText,
+    val marketCapVariation: UiText,
     val marketCapVariationIsPositive: Boolean,
-    val twentyFourHsVolume: String,
-    val btcDominance: String
+    val twentyFourHsVolume: UiText,
+    val btcDominance: UiText
 )
