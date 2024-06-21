@@ -1,3 +1,3 @@
 package com.aherbel.cryptotracker.ui.text
 
-interface UiText
+sealed interface UiText

@@ -1,9 +1,13 @@
+import groovy.lang.Closure
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kover)
 }
 
 android {
@@ -26,6 +30,29 @@ android {
 
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+            animationsDisabled = true
+
+            all { test ->
+                test.jvmArgs("--noverify")
+                test.afterSuite(KotlinClosure<TestDescriptor, TestResult, Unit> { desc, result ->
+                    if (!desc.isRootSuite()) return@KotlinClosure
+
+                    println(
+                        "Test Results: ${result.resultType} " +
+                                "(${result.failedTestCount} failures, " +
+                                "${result.skippedTestCount} skipped)"
+                    )
+                    println("Tests Count: ${result.testCount}")
+                    println(result.calculateTestSuiteTime())
+                })
+                test.testLogging {
+                    events(TestLogEvent.FAILED, TestLogEvent.SKIPPED)
+                }
+            }
+        }
     }
 
     buildTypes {
@@ -62,6 +89,31 @@ android {
     }
 }
 
+class KotlinClosure<in P1, in P2, R>(val block: (P1, P2) -> R) : Closure<R>(null) {
+    @Suppress("unused")
+    fun doCall(p1: P1, p2: P2): R = block(p1, p2)
+}
+
+fun TestResult.calculateTestSuiteTime(): String {
+    val maxTime = endTime - startTime
+    val minutes = TimeUnit.MILLISECONDS.toMinutes(maxTime)
+    val seconds = TimeUnit.MILLISECONDS.toSeconds(maxTime) % 60
+    val milliseconds = maxTime % 1000
+    var message = "Total time for suite: "
+    if (minutes > 0) {
+        message += "${minutes}m "
+    }
+    if (seconds > 0) {
+        message += "${seconds}s "
+    }
+    if (milliseconds > 0) {
+        message += "${milliseconds}ms"
+    }
+    return message
+}
+
+fun TestDescriptor.isRootSuite(): Boolean = parent == null
+
 dependencies {
 
     implementation(libs.core.ktx)
@@ -85,6 +137,8 @@ dependencies {
     testImplementation(libs.junitparams)
     testImplementation(libs.coroutines.test)
     testImplementation(libs.strikt)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
 
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.runner)
