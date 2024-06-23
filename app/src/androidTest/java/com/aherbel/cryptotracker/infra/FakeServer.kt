@@ -1,12 +1,10 @@
 package com.aherbel.cryptotracker.infra
 
 import com.aherbel.cryptotracker.application.network.AddApiKeyHeaderInterceptor
-import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.json.JSONObject
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
-import java.net.HttpURLConnection
 
 class FakeServer {
 
@@ -30,7 +28,7 @@ class FakeServer {
 
     fun willAnswerDefaultMarketDataInformation() {
         val response = readJsonFromResources("global_metrics_default_response.json")
-        configure200Response(response)
+        mockWebServer.return200With(response)
     }
 
     fun willAnswer24HsVolume(twentyFourHsVolume: Double) {
@@ -41,7 +39,7 @@ class FakeServer {
                 .getJSONObject("USD")
                 .put("total_volume_24h", twentyFourHsVolume)
         }
-        configure200Response(response)
+        mockWebServer.return200With(response)
     }
 
     fun willAnswerMarketDataWithMarketCapValueOf(marketCapValue: Double) {
@@ -52,7 +50,7 @@ class FakeServer {
                 .getJSONObject("USD")
                 .put("total_market_cap", marketCapValue)
         }
-        configure200Response(response)
+        mockWebServer.return200With(response)
     }
 
     fun willAnswerMarketDataWithMarketCapPercentageChange(marketCapPercentageChange: Int) {
@@ -63,7 +61,7 @@ class FakeServer {
                 .getJSONObject("USD")
                 .put("total_market_cap_yesterday_percentage_change", marketCapPercentageChange)
         }
-        configure200Response(response)
+        mockWebServer.return200With(response)
     }
 
     fun requestShouldContainsNonEmptyApiKeyHeader() {
@@ -79,29 +77,16 @@ class FakeServer {
         )
     }
 
-    private fun configure200Response(response: String) {
-        mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_OK).setBody(response)
-        )
-    }
-
     fun willAnswerBTCDominance(btcDominance: Int) {
         val response = readJsonFromResources("global_metrics_default_response.json") { jsonResponse ->
             jsonResponse
                 .getJSONObject("data")
                 .put("btc_dominance", btcDominance)
         }
-        configure200Response(response)
+        mockWebServer.return200With(response)
     }
 
     fun willAnswerError400OnMarketData() {
-        configure400Response()
+        mockWebServer.return400()
     }
-
-    private fun configure400Response() {
-        mockWebServer.enqueue(
-            MockResponse().setResponseCode(HttpURLConnection.HTTP_BAD_REQUEST)
-        )
-    }
-
 }
