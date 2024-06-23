@@ -5,7 +5,8 @@ import com.aherbel.cryptotracker.ui.home.HomeUiState
 import com.aherbel.cryptotracker.ui.home.MarketDataUi
 
 data class HomeUiStateBuilder(
-    private var marketDataUi: MarketDataUi = aMarketDataUi().build()
+    private var marketDataUi: MarketDataUi = aMarketDataUi().build(),
+    private var isLoading: Boolean = false
 ) {
 
     companion object {
@@ -16,5 +17,9 @@ data class HomeUiStateBuilder(
         return copy(marketDataUi = marketDataUi.build())
     }
 
-    fun build(): HomeUiState = HomeUiState(marketDataUi = marketDataUi)
+    fun thatIsLoading(): HomeUiStateBuilder {
+        return copy(isLoading = true)
+    }
+
+    fun build(): HomeUiState = HomeUiState(marketDataUi = marketDataUi, isLoading = isLoading)
 }

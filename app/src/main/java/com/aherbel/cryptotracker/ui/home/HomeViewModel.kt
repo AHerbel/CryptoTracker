@@ -30,16 +30,25 @@ class HomeViewModel @Inject constructor(
 
     fun requestMarketData() {
         viewModelScope.launch {
+            updateUiState { uiState ->
+                uiState.copy(isLoading = true)
+            }
             marketDataRepository
                 .marketData()
                 .catch {
                     updateUiState { uiState ->
-                        uiState.copy(marketDataUi = errorMarketDataUi())
+                        uiState.copy(
+                            isLoading = false,
+                            marketDataUi = errorMarketDataUi()
+                        )
                     }
                 }
                 .collect { marketData ->
                     updateUiState { uiState ->
-                        uiState.copy(marketDataUi = mapToUi(marketData))
+                        uiState.copy(
+                            isLoading = false,
+                            marketDataUi = mapToUi(marketData)
+                        )
                     }
                 }
         }
@@ -65,7 +74,8 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun initialMainUiState(): HomeUiState = HomeUiState(
-        marketDataUi = initialMarketDataUi()
+        marketDataUi = initialMarketDataUi(),
+        isLoading = false
     )
 
     private fun errorMarketDataUi(): MarketDataUi = MarketDataUi(
@@ -86,7 +96,8 @@ class HomeViewModel @Inject constructor(
 }
 
 data class HomeUiState(
-    val marketDataUi: MarketDataUi
+    val marketDataUi: MarketDataUi,
+    val isLoading: Boolean
 )
 
 data class MarketDataUi(

@@ -12,7 +12,9 @@ import org.junit.Rule
 import org.junit.Test
 import strikt.api.expectThat
 import strikt.assertions.isEqualTo
+import strikt.assertions.isFalse
 import strikt.assertions.isNotNull
+import strikt.assertions.isTrue
 
 class HomeViewModelTest {
 
@@ -30,7 +32,7 @@ class HomeViewModelTest {
 
         expectThat(mainUiState)
             .isNotNull()
-            .isEqualTo(aMainUiState().build())
+            .isEqualTo(aMainUiState().thatIsLoading().build())
     }
 
     @Test
@@ -85,5 +87,45 @@ class HomeViewModelTest {
                             .isEqualTo(notAvailableText)
                     }
             }
+    }
+
+    @Test
+    fun `asking for MarketData shows loading while data is being fetched`() = runTest {
+        mainViewModel.requestMarketData()
+
+        val isLoading = mainViewModel.uiState.firstOrNull()?.isLoading
+
+        expectThat(isLoading)
+            .describedAs("isLoading")
+            .isNotNull()
+            .isTrue()
+    }
+
+    @Test
+    fun `loading is hidden after fetching data`() = runTest {
+        fakeMarketDataRepository.items = listOf(aMarketData().build())
+
+        mainViewModel.requestMarketData()
+
+        val isLoading = mainViewModel.uiState.firstOrNull()?.isLoading
+
+        expectThat(isLoading)
+            .describedAs("isLoading")
+            .isNotNull()
+            .isFalse()
+    }
+
+    @Test
+    fun `loading is hidden after error when fetching data`() = runTest {
+        fakeMarketDataRepository.throwError = true
+
+        mainViewModel.requestMarketData()
+
+        val isLoading = mainViewModel.uiState.firstOrNull()?.isLoading
+
+        expectThat(isLoading)
+            .describedAs("isLoading")
+            .isNotNull()
+            .isFalse()
     }
 }
