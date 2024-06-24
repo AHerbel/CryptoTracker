@@ -161,7 +161,7 @@ class HomeActivityTest {
     @Test
     fun onPullToRefresh_whenFinished_hidesLoading() = runTest {
         fakeServer.willAnswerDefaultMarketDataInformation()
-        fakeServer.willAnswerDefaultMarketDataInformationWithDelayOf(500, TimeUnit.MILLISECONDS)
+        fakeServer.willAnswerDefaultMarketDataInformationWithDelayOf(100, TimeUnit.MILLISECONDS)
 
         fakeApplication.launchHomeScreen()
 
@@ -174,7 +174,7 @@ class HomeActivityTest {
             performPullToRefresh()
             displaysLoading()
 
-            fakeApplication.delayBy(500)
+            fakeApplication.delayBy(100)
             hidesLoading()
         }
     }
