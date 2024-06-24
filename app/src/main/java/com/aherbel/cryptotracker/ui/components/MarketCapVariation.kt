@@ -21,18 +21,18 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun MarketCapVariation(
     variation: String,
-    variationIsPositive: Boolean
+    isPositive: Boolean
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        val variationColor = if (variationIsPositive) Color.Green else Color.Red
+        val variationColor = if (isPositive) Color.Green else Color.Red
         Icon(
             imageVector = Icons.Default.ArrowDropDown,
             tint = variationColor,
             contentDescription = "MarketCapVariationIndicator",
             modifier = Modifier
                 .size(20.dp)
-                .rotate(if (variationIsPositive) 180f else 0f)
-                .semantics { isVariationPositive = variationIsPositive }
+                .rotate(if (isPositive) 180f else 0f)
+                .semantics { isVariationPositive = isPositive }
         )
         Text(
             text = variation,
