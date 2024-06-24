@@ -12,6 +12,7 @@ import androidx.compose.ui.test.swipeDown
 import androidx.test.core.app.ApplicationProvider
 import com.aherbel.cryptotracker.R
 import com.aherbel.cryptotracker.matchers.assertTextColor
+import com.aherbel.cryptotracker.ui.components.IsVariationPositive
 import com.aherbel.cryptotracker.ui.home.IsRefreshing
 
 fun homeScreen(
@@ -25,7 +26,7 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
     private val marketCapTitle = composeTestRule.onNodeWithContentDescription("MarketCapTitle")
     private val marketCapValue = composeTestRule.onNodeWithContentDescription("MarketCapValue")
     private val marketCapVariation = composeTestRule.onNodeWithContentDescription("MarketCapVariation")
-    private val marketCapVariationArrow = composeTestRule.onNodeWithContentDescription("MarketCapVariationArrow")
+    private val marketCapVariationArrow = composeTestRule.onNodeWithContentDescription("MarketCapVariationIndicator")
     private val twentyFourHsVolumeTitle = composeTestRule.onNodeWithContentDescription("24HsVolumeTitle")
     private val twentyFourHsVolumeText = composeTestRule.onNodeWithContentDescription("24HsVolumeValue")
     private val btcDominanceTitle = composeTestRule.onNodeWithContentDescription("BTCDominanceTitle")
@@ -33,19 +34,20 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
     private val homeContainer = composeTestRule.onNodeWithContentDescription("HomeContainer")
 
     fun displaysPositiveMarketCapVariationOf(variation: String) {
-        displaysMarketCapVariationOf(variation, Color.Green)
+        displaysMarketCapVariationOf(variation, Color.Green, true)
     }
 
     fun displaysNegativeMarketCapVariationOf(variation: String) {
-        displaysMarketCapVariationOf(variation, Color.Red)
+        displaysMarketCapVariationOf(variation, Color.Red, false)
     }
 
-    private fun displaysMarketCapVariationOf(variation: String, color: Color) {
+    private fun displaysMarketCapVariationOf(variation: String, color: Color, isVariationPositive: Boolean) {
         marketCapVariation
             .assertIsDisplayed()
             .assertTextEquals(variation)
             .assertTextColor(color)
-        marketCapVariationArrow
+        composeTestRule
+            .onNode(SemanticsMatcher.expectValue(IsVariationPositive, isVariationPositive))
             .assertIsDisplayed()
     }
 
