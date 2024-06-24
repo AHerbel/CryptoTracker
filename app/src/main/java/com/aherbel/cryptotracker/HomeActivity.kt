@@ -24,7 +24,11 @@ class HomeActivity : ComponentActivity() {
         setContent {
             CryptoTrackerTheme {
                 val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-                HomeScreen(marketData = uiState.marketDataUi)
+                HomeScreen(
+                    marketData = uiState.marketDataUi,
+                    isLoading = uiState.isLoading,
+                    onRefresh = { viewModel.requestMarketData() }
+                )
             }
         }
     }

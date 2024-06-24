@@ -9,14 +9,13 @@ import com.aherbel.cryptotracker.infra.robots.homeScreen
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.util.concurrent.TimeUnit
 
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @HiltAndroidTest
 @UninstallModules(NetworkConfigurationModule::class)
 class HomeActivityTest {
@@ -137,6 +136,46 @@ class HomeActivityTest {
             displaysNotAvailable24HsVolume()
             displaysNotAvailableBtcDominance()
             doesNotDisplayMarketCapVariation()
+        }
+    }
+
+    @Test
+    fun onPullToRefresh_whenStarted_displaysLoading() {
+        fakeServer.willAnswerDefaultMarketDataInformation()
+        fakeServer.willAnswerDefaultMarketDataInformationWithDelayOf(500, TimeUnit.MILLISECONDS)
+
+        fakeApplication.launchHomeScreen()
+
+        homeScreen(composeRule) {
+            displays24HsVolumeOf("$0.00")
+            displaysMarketCapValueOf("$0.00")
+            displaysBTCDominanceOf("0.00%")
+            displaysNegativeMarketCapVariationOf("0%")
+
+            performPullToRefresh()
+
+            displaysLoading()
+        }
+    }
+
+    @Test
+    fun onPullToRefresh_whenFinished_hidesLoading() = runTest {
+        fakeServer.willAnswerDefaultMarketDataInformation()
+        fakeServer.willAnswerDefaultMarketDataInformationWithDelayOf(500, TimeUnit.MILLISECONDS)
+
+        fakeApplication.launchHomeScreen()
+
+        homeScreen(composeRule) {
+            displays24HsVolumeOf("$0.00")
+            displaysMarketCapValueOf("$0.00")
+            displaysBTCDominanceOf("0.00%")
+            displaysNegativeMarketCapVariationOf("0%")
+
+            performPullToRefresh()
+            displaysLoading()
+
+            fakeApplication.delayBy(500)
+            hidesLoading()
         }
     }
 }

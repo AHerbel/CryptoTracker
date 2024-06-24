@@ -8,4 +8,8 @@ class FakeApplication {
     fun launchHomeScreen() {
         ActivityScenario.launch(HomeActivity::class.java)
     }
+
+    fun delayBy(millis: Long) {
+        Thread.sleep(millis)
+    }
 }

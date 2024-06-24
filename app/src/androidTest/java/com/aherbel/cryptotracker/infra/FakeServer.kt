@@ -5,6 +5,7 @@ import okhttp3.mockwebserver.MockWebServer
 import org.json.JSONObject
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
+import java.util.concurrent.TimeUnit
 
 class FakeServer {
 
@@ -24,6 +25,11 @@ class FakeServer {
         val jsonResponse = JSONObject(rawResponse.orEmpty())
         configure(jsonResponse)
         return jsonResponse.toString()
+    }
+
+    fun willAnswerDefaultMarketDataInformationWithDelayOf(delay: Long, delayUnit: TimeUnit) {
+        val response = readJsonFromResources("global_metrics_default_response.json")
+        mockWebServer.return200With(response, delay, delayUnit)
     }
 
     fun willAnswerDefaultMarketDataInformation() {

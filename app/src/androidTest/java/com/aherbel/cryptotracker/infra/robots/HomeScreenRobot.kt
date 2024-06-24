@@ -2,20 +2,24 @@ package com.aherbel.cryptotracker.infra.robots
 
 import android.content.Context
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipeDown
 import androidx.test.core.app.ApplicationProvider
 import com.aherbel.cryptotracker.R
 import com.aherbel.cryptotracker.matchers.assertTextColor
+import com.aherbel.cryptotracker.ui.home.IsRefreshing
 
 fun homeScreen(
     composeTestRule: ComposeTestRule,
     block: HomeScreenRobot.() -> Unit
 ) = HomeScreenRobot(composeTestRule).apply(block)
 
-class HomeScreenRobot(composeTestRule: ComposeTestRule) {
+class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
 
     private val livePricesText = composeTestRule.onNodeWithContentDescription("LivePrices")
     private val marketCapTitle = composeTestRule.onNodeWithContentDescription("MarketCapTitle")
@@ -26,21 +30,21 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
     private val twentyFourHsVolumeText = composeTestRule.onNodeWithContentDescription("24HsVolumeValue")
     private val btcDominanceTitle = composeTestRule.onNodeWithContentDescription("BTCDominanceTitle")
     private val btcDominanceValue = composeTestRule.onNodeWithContentDescription("BTCDominanceValue")
+    private val homeContainer = composeTestRule.onNodeWithContentDescription("HomeContainer")
 
     fun displaysPositiveMarketCapVariationOf(variation: String) {
-        marketCapVariation
-            .assertIsDisplayed()
-            .assertTextEquals(variation)
-            .assertTextColor(Color.Green)
-        marketCapVariationArrow
-            .assertIsDisplayed()
+        displaysMarketCapVariationOf(variation, Color.Green)
     }
 
     fun displaysNegativeMarketCapVariationOf(variation: String) {
+        displaysMarketCapVariationOf(variation, Color.Red)
+    }
+
+    private fun displaysMarketCapVariationOf(variation: String, color: Color) {
         marketCapVariation
             .assertIsDisplayed()
             .assertTextEquals(variation)
-            .assertTextColor(Color.Red)
+            .assertTextColor(color)
         marketCapVariationArrow
             .assertIsDisplayed()
     }
@@ -101,5 +105,21 @@ class HomeScreenRobot(composeTestRule: ComposeTestRule) {
         twentyFourHsVolumeText
             .assertIsDisplayed()
             .assertTextEquals(notAvailable())
+    }
+
+    fun performPullToRefresh() {
+        homeContainer.performTouchInput { swipeDown() }
+    }
+
+    fun displaysLoading() {
+        composeTestRule
+            .onNode(SemanticsMatcher.expectValue(IsRefreshing, true))
+            .assertExists()
+    }
+
+    fun hidesLoading() {
+        composeTestRule
+            .onNode(SemanticsMatcher.expectValue(IsRefreshing, false))
+            .assertExists()
     }
 }
