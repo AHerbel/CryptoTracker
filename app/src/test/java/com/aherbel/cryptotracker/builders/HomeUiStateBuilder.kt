@@ -1,6 +1,6 @@
-package com.aherbel.cryptotracker
+package com.aherbel.cryptotracker.builders
 
-import com.aherbel.cryptotracker.MarketDataUiBuilder.Companion.aMarketDataUi
+import com.aherbel.cryptotracker.builders.MarketDataUiBuilder.Companion.aMarketDataUi
 import com.aherbel.cryptotracker.ui.home.HomeUiState
 import com.aherbel.cryptotracker.ui.home.MarketDataUi
 

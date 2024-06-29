@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker
+package com.aherbel.cryptotracker.builders
 
 import com.aherbel.cryptotracker.ui.home.MarketDataUi
 import com.aherbel.cryptotracker.ui.text.PlainUiText

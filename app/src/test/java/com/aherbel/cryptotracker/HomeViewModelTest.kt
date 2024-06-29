@@ -1,10 +1,10 @@
 package com.aherbel.cryptotracker
 
-import com.aherbel.cryptotracker.AndroidResourceUiTextDataBuilder.Companion.anAndroidResourceUiText
-import com.aherbel.cryptotracker.HomeUiStateBuilder.Companion.aMainUiState
-import com.aherbel.cryptotracker.MarketDataBuilder.Companion.aMarketData
-import com.aherbel.cryptotracker.PlainUiTextDataBuilder.Companion.aPlainUiText
 import com.aherbel.cryptotracker.application.DecimalPercentageFormatter
+import com.aherbel.cryptotracker.builders.AndroidResourceUiTextDataBuilder.Companion.anAndroidResourceUiText
+import com.aherbel.cryptotracker.builders.HomeUiStateBuilder.Companion.aMainUiState
+import com.aherbel.cryptotracker.builders.MarketDataBuilder.Companion.aMarketData
+import com.aherbel.cryptotracker.builders.PlainUiTextDataBuilder.Companion.aPlainUiText
 import com.aherbel.cryptotracker.ui.home.HomeViewModel
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.test.runTest

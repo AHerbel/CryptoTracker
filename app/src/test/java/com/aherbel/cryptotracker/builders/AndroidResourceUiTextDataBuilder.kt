@@ -1,4 +1,4 @@
-package com.aherbel.cryptotracker
+package com.aherbel.cryptotracker.builders
 
 import androidx.annotation.StringRes
 import com.aherbel.cryptotracker.ui.text.AndroidResourceUiText
