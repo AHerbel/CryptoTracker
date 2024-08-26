@@ -95,4 +95,9 @@ class FakeServer {
     fun willAnswerError400OnMarketData() {
         mockWebServer.return400()
     }
+
+    fun willAnswerDefaultCoinsList() {
+        val response = readJsonFromResources("coins_list_default_response.json")
+        mockWebServer.return200With(response)
+    }
 }

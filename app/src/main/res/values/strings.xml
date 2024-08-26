@@ -5,4 +5,6 @@
     <string name="twenty_four_hs_volume">24h Volume</string>
     <string name="btc_dominance">BTC Dominance</string>
     <string name="not_available">N/A</string>
+    <string name="coin">Coin</string>
+    <string name="price">Price</string>
 </resources>

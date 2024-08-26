@@ -1,0 +1,37 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Bitcoin",
+      "symbol": "BTC",
+      "quote": {
+        "USD": {
+          "price": 9283.92,
+          "percent_change_24h": 0.518894
+        }
+      }
+    },
+    {
+      "id": 1027,
+      "name": "Ethereum",
+      "symbol": "ETH",
+      "quote": {
+        "USD": {
+          "price": 1283.92,
+          "percent_change_24h": 0.518894
+        }
+      }
+    },
+    {
+      "id": 2087,
+      "name": "Tether USD",
+      "symbol": "USDT",
+      "quote": {
+        "USD": {
+          "price": 99.98,
+          "percent_change_24h": 0.785223
+        }
+      }
+    }
+  ]
+}

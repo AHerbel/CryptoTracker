@@ -7,6 +7,7 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
 import androidx.test.core.app.ApplicationProvider
@@ -32,6 +33,9 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
     private val btcDominanceTitle = composeTestRule.onNodeWithContentDescription("BTCDominanceTitle")
     private val btcDominanceValue = composeTestRule.onNodeWithContentDescription("BTCDominanceValue")
     private val homeContainer = composeTestRule.onNodeWithContentDescription("HomeContainer")
+    private val coinsListLeftColumn = composeTestRule.onNodeWithContentDescription("CoinsListLeftColumn")
+    private val coinsListRightColumn = composeTestRule.onNodeWithContentDescription("CoinsListRightColumn")
+    private val coinsList = composeTestRule.onNodeWithContentDescription("CoinsList")
 
     fun displaysPositiveMarketCapVariationOf(variation: String) {
         displaysMarketCapVariationOf(variation, Color.Green, true)
@@ -123,5 +127,17 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
         composeTestRule
             .onNode(SemanticsMatcher.expectValue(IsRefreshing, false))
             .assertExists()
+    }
+
+    fun displaysCoinsList() {
+        coinsListLeftColumn.assertIsDisplayed()
+        coinsListRightColumn.assertIsDisplayed()
+        coinsList.assertIsDisplayed()
+    }
+
+    fun displaysCoins(vararg coins: String) {
+        coins.forEach { coin ->
+            composeTestRule.onNodeWithText(coin).assertIsDisplayed()
+        }
     }
 }

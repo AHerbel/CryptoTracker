@@ -174,8 +174,20 @@ class HomeActivityTest {
             performPullToRefresh()
             displaysLoading()
 
-            fakeApplication.delayBy(100)
+            fakeApplication.delayBy(300)
             hidesLoading()
+        }
+    }
+
+    @Test
+    fun openHome_whenStarted_displaysCoinsList() {
+        fakeServer.willAnswerDefaultCoinsList()
+
+        fakeApplication.launchHomeScreen()
+
+        homeScreen(composeRule) {
+            displaysCoinsList()
+            displaysCoins("BTC", "ETH", "USDT")
         }
     }
 }
