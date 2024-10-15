@@ -186,7 +186,6 @@ class HomeActivityTest {
         fakeApplication.launchHomeScreen()
 
         homeScreen(composeRule) {
-            displaysCoinsList()
             displaysCoins("BTC", "ETH", "USDT")
         }
     }

@@ -129,13 +129,14 @@ class HomeScreenRobot(private val composeTestRule: ComposeTestRule) {
             .assertExists()
     }
 
-    fun displaysCoinsList() {
+    private fun displaysCoinsList() {
         coinsListLeftColumn.assertIsDisplayed()
         coinsListRightColumn.assertIsDisplayed()
         coinsList.assertIsDisplayed()
     }
 
     fun displaysCoins(vararg coins: String) {
+        displaysCoinsList()
         coins.forEach { coin ->
             composeTestRule.onNodeWithText(coin).assertIsDisplayed()
         }
